@@ -4,7 +4,7 @@ from .models import Profile
 from resturent_apiApp.models import Returent
 
 
-#Profile Serilizer
+# Profile Serilizer
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
@@ -14,7 +14,7 @@ class UserSerializer(serializers.ModelSerializer):
         ]
 
 
-#Resturent serilizer
+# Resturent serilizer
 class ResturentsSerilizer(serializers.ModelSerializer):
     class Meta:
         model = Returent
@@ -31,9 +31,9 @@ class ResturentsSerilizer(serializers.ModelSerializer):
         )
 
 
-#Profile Serilizer
+# Profile Serilizer
 class ProfileSerializer(serializers.ModelSerializer):
-    returent = ResturentsSerilizer(many = True)
+    returent = ResturentsSerilizer(many=True)
 
     class Meta:
         model = Profile

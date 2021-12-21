@@ -10,39 +10,43 @@ const AddResturentPage = (props) => {
     const [HaveAccount, setHaveAccount] = useState(false)
     if (!props.ProfileItem) return "Loading...";
     if (!props.ProfileItem) return "Error!";
-   
-    axios.post(`${BackendLink}/api/users/checkbusiness`,{
+
+    axios.post(`${BackendLink}/api/users/checkbusiness`, {
         check: "business",
         ID: props.ProfileItem.id
     })
-    .then((res)=> {
-        if(res.data === "has_account"){
-            setHaveAccount(true)
-        }
-    })
+        .then((res) => {
+            if (res.data === "has_account") {
+                setHaveAccount(true)
+            }
+        })
 
     return (
-     <>
-     <Header id="show"/>
-     <HiddenHeader
-        ProfileItem={props.ProfileItem}
-        UserItem={props.UserItem}
-     />
-     {HaveAccount ?
-        <div className="full_re_add_view">
-            <div className="add_res_left">
-                <ResturentAddForm ProfileItem={props.ProfileItem} />
-            </div>
+        <>
+            <Header id="show" />
+            <HiddenHeader
+                ProfileItem={props.ProfileItem}
+                UserItem={props.UserItem}
+            />
+            {HaveAccount ?
+                <div className="full_re_add_view">
+                    <div className="add_res_left">
+                        <ResturentAddForm
+                            ProfileItem={props.ProfileItem}
+                            articles={props.UserResturents}
+                            setUserResturents={props.setUserResturents}
+                        />
+                    </div>
 
-            <div className="add_res_right">
-                <ResturentLists 
-                    articles={props.ProfileItem.returent}
-                />
-            </div>
-        </div>:
-        <div>No</div>
-     }
-     </>
+                    <div className="add_res_right">
+                        <ResturentLists
+                            articles={props.UserResturents}
+                        />
+                    </div>
+                </div> :
+                <div>No</div>
+            }
+        </>
     )
 }
 

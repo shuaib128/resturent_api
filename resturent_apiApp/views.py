@@ -1,13 +1,7 @@
-from django.contrib.auth.models import User
-from django.shortcuts import render
-
 from users.models import Profile
 from .models import Returent
 from .serializers import ResturentSerializer
-from rest_framework.authentication import TokenAuthentication
-from rest_framework.permissions import IsAuthenticated
-from rest_framework import viewsets
-from django.http import JsonResponse
+from rest_framework import serializers, viewsets
 from django_filters import rest_framework as filters
 from rest_framework.views import APIView
 from rest_framework.parsers import JSONParser, MultiPartParser, FormParser
@@ -36,12 +30,10 @@ class ResturentViewSet(viewsets.ModelViewSet):
 class ResturentCreateView(APIView):
     parser_classes = [MultiPartParser, FormParser, JSONParser]
     def post(self, request, format=None):
-        user = get_object_or_404(User, id=request.data["userID"])
         profile = get_object_or_404(Profile, user=request.data["userID"])
         
         #Create new restorunt
         resturent = Returent()
-        resturent.user = user
         resturent.title = request.data["Name"]
         resturent.body = request.data["Description"]
         resturent.distance = request.data["Distance"]
@@ -59,4 +51,6 @@ class ResturentCreateView(APIView):
         created_restorent = get_object_or_404(Returent, title=request.data["Name"])
         profile.returent.add(created_restorent)
 
-        return Response("has_account")
+        serilizer = ResturentSerializer(created_restorent)
+
+        return Response(serilizer.data)

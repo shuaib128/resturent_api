@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import axios from 'axios'
 import { BackendLink } from '../../Api/BackendLink'
 
@@ -18,6 +18,17 @@ const ResturentAddForm = (props) => {
         setCoverimage({
             image: e.target.files[0],
         });
+
+        var prevImgSec = document.querySelector('.res_prevImage')
+        const file = e.target.files
+
+        const reader = new FileReader()
+        reader.addEventListener("load", function () {
+            prevImgSec.innerHTML += `
+                <img src=${this.result} />
+            `
+        })
+        reader.readAsDataURL(file[0])
     }
 
     //Add new resturent
@@ -25,7 +36,7 @@ const ResturentAddForm = (props) => {
         e.preventDefault();
 
         URL = `${BackendLink}/api/restaurants/add/resturent/`
-        const config = { headers: { 'Content-Type': 'multipart/form-data' }}
+        const config = { headers: { 'Content-Type': 'multipart/form-data' } }
 
         let formData = new FormData()
         formData.append('Name', Name)
@@ -39,12 +50,25 @@ const ResturentAddForm = (props) => {
         try {
             formData.append('coverimage', coverimage.image)
         } catch (error) {
-            
+
         }
 
         axios
-        .post(URL, formData, config)
-        .catch((err) => console.log(err))
+            .post(URL, formData, config)
+            .then(res => {
+                props.setUserResturents([...props.articles, res.data])
+            })
+            .catch((err) => console.log(err))
+
+        setName("")
+        setDescription("")
+        setDistance("")
+        setDelevaryFee("")
+        setLocation("")
+        setLongitude("")
+        setLangitude("")
+        setCoverimage("")
+        document.querySelector(".res_add_form").reset()
     }
 
     return (
@@ -53,33 +77,35 @@ const ResturentAddForm = (props) => {
                 <input type="text" placeholder="Name"
                     onChange={e => setName(e.target.value)}
                 />
-                <textarea placeholder="Description" 
+                <textarea placeholder="Description"
                     onChange={e => setDescription(e.target.value)}
                 />
-                <input type="text" placeholder="Distance" 
+                <input type="number" placeholder="Distance"
                     onChange={e => setDistance(e.target.value)}
                 />
-                <input type="text" placeholder="Delevary fee" 
+                <input type="number" placeholder="Delevary fee"
                     onChange={e => setDelevaryFee(e.target.value)}
                 />
-                <input type="text" placeholder="Location" 
+                <input type="text" placeholder="Location"
                     onChange={e => setLocation(e.target.value)}
                 />
-                <input type="text" placeholder="langatude" 
+                <input type="number" placeholder="langatude"
                     onChange={e => setLangitude(e.target.value)}
                 />
-                <input type="text" placeholder="longatude" 
+                <input type="number" placeholder="longatude"
                     onChange={e => setLongitude(e.target.value)}
                 />
                 <input type="file" accept="image/*"
                     onChange={uploadCover}
                 />
 
-                <button
-                    className="res_add_button"
-                >
-                    Add
-                </button>
+                <div className="res_prevImage"></div>
+
+                {Name && Description && Distance && DelevaryFee && Location && Longitude && Langitude && coverimage ?
+                    <button className="res_add_button">Add</button>
+                    :
+                    <button className="res_add_button" disabled>Add</button>
+                }
             </form>
         </div>
     )

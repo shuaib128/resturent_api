@@ -10,7 +10,7 @@ const ResturentLists = (props) => {
                 return(
                     <div className="resturent" key={article.id}>
                         <div className="resturent_image">
-                            <Link to={'/returent/'+article.id}>
+                            <Link to={'/returent/'}>
                                 <img src={BackendLink + article.image} alt="food"/>
                             </Link>
                         </div>

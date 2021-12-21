@@ -18,25 +18,26 @@ function App() {
   const [ProfileID, setProfileID] = useState()
   const [ProfileItem, setProfileItem] = useState(undefined)
   const [UserItem, setUserItem] = useState(undefined)
+  const [UserResturents, setUserResturents] = useState(undefined)
 
 
   //Get Profile datas
   useEffect(() => {
-    try{
-      const accestoken = localStorage.getItem("accestoken")
-      const content_decoded = jwt_decode(accestoken)
-      
-      axios.post(`${BackendLink}/api/users/profile`, {
-        id: content_decoded.user_id
-      })
-      .then((res) => {
-        setProfileItem(res.data);
-      })
+    try {
+        const accestoken = localStorage.getItem("accestoken")
+        const content_decoded = jwt_decode(accestoken)
+
+        axios.post(`${BackendLink}/api/users/profile`, {
+            id: content_decoded.user_id
+        })
+            .then((res) => {
+                setProfileItem(res.data);
+                setUserResturents(res.data.returent);
+            })
+    } catch {
+        console.log("Wrong bra");
     }
-    catch{
-      console.log("Wrong bra");
-    }
-  }, [ProfileID])
+}, [ProfileID])
 
 
   useEffect(() => {
@@ -78,6 +79,7 @@ function App() {
               <Route exact path='/create/ride' render={() => <CreateDeliverAccount />}/>
               <Route exact path='/add/resturent' render={() => <AddResturentPage 
                  ProfileItem={ProfileItem} UserItem={UserItem}
+                 UserResturents={UserResturents} setUserResturents={setUserResturents}
               />}/>
               <Route exact path='/add/rider' render={() => <AddRiderPage 
                  ProfileItem={ProfileItem} UserItem={UserItem}

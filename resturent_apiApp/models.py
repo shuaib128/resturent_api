@@ -32,7 +32,6 @@ class Item(models.Model):
 
 
 class Returent(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, default=5)
     title = models.CharField(max_length=200)
     body = models.TextField()
     image = models.ImageField(null=True, blank=True, upload_to='media/dineinImages',)
