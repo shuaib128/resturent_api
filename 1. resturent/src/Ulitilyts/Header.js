@@ -14,8 +14,6 @@ const Header = (props) => {
         menu.style.zIndex = 0
         tl.to(hidden_header, .3, {visibility: 'visible', opacity: .6})
           .to(main_menu, .4, {left: 0, ease: Power3.easeOut, delay: .2})
-
-        document.body.style.cssText = "height: 100vh; overflow: hidden"
     }
 
 
@@ -28,7 +26,7 @@ const Header = (props) => {
         <div className="header">
             <div className="logo_menu_bar">
                 <button className="menubar" onClick={menuapper}>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" strokeLinejoin="round">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinejoin="round">
                         <line x1="4" y1="12" x2="20" y2="12"></line>
                         <line x1="4" y1="6" x2="20" y2="6"></line>
                         <line x1="4" y1="18" x2="20" y2="18"></line>
@@ -60,7 +58,7 @@ const Header = (props) => {
 
             <div style={{display: 'flex'}}>
                 <div className="search_bar">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" strokeLinejoin="round">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinejoin="round">
                         <circle cx="11" cy="11" r="8"></circle>
                         <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
                     </svg>
@@ -68,7 +66,7 @@ const Header = (props) => {
                 </div>
 
                 <div className="cart_btn">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" strokeLinejoin="round">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinejoin="round">
                         <circle cx="9" cy="21" r="1"></circle>
                         <circle cx="20" cy="21" r="1"></circle>
                         <path d="M1 1h4l2.68 13.39a2 2 0 002 1.61h9.72a2 2 0 002-1.61L23 6H6"></path>

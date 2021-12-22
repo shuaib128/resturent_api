@@ -14,6 +14,7 @@ import CreateDeliverAccount from './pages/CreateDeliverAccount';
 import AddResturentPage from './pages/AddResturentPage';
 import AddRiderPage from './pages/AddRiderPage';
 import AddResturentItems from './pages/AddResturentItems';
+import SearchPage from './pages/SearchPage';
 
 function App() {
   const [ProfileID, setProfileID] = useState()
@@ -87,6 +88,7 @@ function App() {
             <Route exact path='/add/item/:id' render={() => <AddResturentItems
               ProfileItem={ProfileItem} UserItem={UserItem}
             />} />
+            <Route exact path='/search' render={() => <SearchPage />} />
           </Switch>
         </AnimatePresence>
       </Router>

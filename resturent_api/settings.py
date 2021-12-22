@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-uxklxg=k6p4$09j4v3*f64mch$ytne8ck_k4+@q*bl%77$(s1n
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -61,6 +61,7 @@ MIDDLEWARE = [
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
+    "https://shu-res.netlify.app",
 ]
 
 ROOT_URLCONF = 'resturent_api.urls'

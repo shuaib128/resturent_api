@@ -3,12 +3,13 @@ import { useParams } from 'react-router-dom'
 import ResturentMapOpenDates from './ResturentMapOpenDates';
 import { gsap } from 'gsap'
 import axios from 'axios';
+import { BackendLink } from '../../Api/BackendLink';
 
 const ResturentBillBord = () => {
     //Fetch resturent data
     const { id } = useParams()
     const [articles, setArticles] = useState(() => {
-        axios.get(`http://127.0.0.1:8000/api/restaurants/${id}/`)
+        axios.get(`${BackendLink}/api/restaurants/${id}/`)
         .then(res => setArticles(res.data))
     })
 

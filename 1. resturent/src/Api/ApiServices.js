@@ -1,7 +1,9 @@
+import { BackendLink } from "./BackendLink"
+
 export default class APIService{
     //Get all article datas
     static GetAllArticels(token, article_state, search_data){
-        fetch(`http://127.0.0.1:8000/api/restaurants/?foodItems__category__title__icontains=${search_data}`, {
+        fetch(`${BackendLink}/api/restaurants/?foodItems__category__title__icontains=${search_data}`, {
         'method': 'GET',
         headers: {
             'Content-Type':'application/json',
@@ -21,7 +23,7 @@ export default class APIService{
 
     //Get single article data
     static GetSingleArticels(id_, token, article_state){
-        fetch(`http://127.0.0.1:8000/api/restaurants/${id_}/`, {
+        fetch(`${BackendLink}/api/restaurants/${id_}/`, {
         'method': 'GET',
         headers: {
             'Content-Type':'application/json',
