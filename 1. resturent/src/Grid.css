@@ -1,0 +1,171 @@
+@media screen and (max-width: 1200px){
+    .header{
+        display: none;
+    }
+
+    .header_response_div{
+        display: block;
+    }
+
+    .header_response{
+        display: flex;
+    }
+
+    .filter{
+        display: none;
+    }
+
+    .filter_responsive{
+        display: none;
+        position: fixed;
+        width: 93%;
+        height: 100vh;
+        background: white;
+        left: 0;
+        right: 0;
+        padding: 10px 43px;
+        z-index: 20;
+        top: 0;
+    }
+
+    .billbord{
+        margin-top: 27px;
+    }
+
+    .food_items{
+        grid-template-columns: 1fr 1fr;
+    }
+    
+    .full_re_add_view{
+        margin-top: 23px
+    }
+}
+
+
+
+
+@media screen and (max-width: 750px){
+    .resturents {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-gap: 3%;
+    }   
+    
+    .resturent_image {
+        height: 189px;
+    }
+    
+    .filter_responsive{
+        width: 87%;
+    }
+
+    .food_items{
+        grid-template-columns: 1fr;
+    }
+
+    .food_Section {
+        padding-top: 566px;
+    }
+
+    .signup_page {
+        width: 82%;
+    }
+
+    .businesscreate_main{
+        display: block;
+    }
+
+    .create_business_left {
+        width: 100%;
+        padding-right: 0%;
+    }
+
+    .create_business_right {
+        width: 75%;
+        padding-top: 5%;
+        min-height: 27vw;
+        margin: 0 auto;
+    }
+
+    .full_re_add_view{
+        margin-top: 23px;
+        display: block;
+    }
+
+    .add_res_left {
+        width: 100%;
+    }
+
+    .res_add_form {
+        width: 100%;
+    }
+
+    .add_res_right {
+        width: 100%;
+    }
+
+    .full_re_add_view .food_Section{
+        padding-top: 40px;
+    }
+}
+
+
+
+@media screen and (max-width: 530px){
+    .App {
+        padding: 0px 17px;
+    }
+
+    .resturents {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-gap: 3%;
+    }   
+    
+    .resturent_image {
+        height: 230px;
+    }
+
+    .logo {
+        margin-left: 7px;
+        font-size: 26px;
+    }
+
+    .res_name {
+        font-size: 34px;
+        font-weight: 800;
+        margin-top: 0px;
+    }
+
+    .name_del_fee{
+        height: fit-content;
+        padding: 0px 18px;
+        padding-bottom: 29px;
+    }
+
+    .food_Section {
+        padding-top: 600px;
+    }
+    
+    .menu_item{
+        border: none;
+    }
+
+    .signup_page {
+        width: 95%;
+    }
+
+    .logIn_form input {
+        width: 89.5%;
+    }
+
+    .create_business_left h1 {
+        font-size: 35px
+    }
+
+    .create_business_right {
+        width: 100%;
+    }
+}

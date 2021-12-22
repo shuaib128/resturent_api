@@ -1,31 +1,23 @@
-import {React, useState, useEffect} from 'react';
-import { useParams } from 'react-router-dom'
-import { Token } from '../../Api/Token';
-import APIService from '../../Api/ApiServices';
+import {React, useState} from 'react';
+import { BackendLink } from '../../Api/BackendLink';
 
-const FoodItems = (props) => {
+const ItemLists = (props) => {
     var categories = []
 
     //Fetch resturent data
-    const { id } = useParams()
-    const [articles, setArticles] = useState([])
     const [filterCategory, setFilterCategory] = useState("")
-    useEffect(() => {
-        APIService.GetSingleArticels(id, Token, setArticles)
-    }, [])
-
     
     //Get all category to display
-    for(const key in articles.foodItems){
-        categories.push(articles.foodItems[key].categoryName)
+    for(const key in props.articles){
+        categories.push(props.articles[key].categoryName)
     }
     categories = [...new Set(categories)];
     
 
     return (
         <>           
-            <div className="food_Section">
-                <div className="categiry_filter">
+            <div className="food_Section food_Section_additem">
+                <div className="categiry_filter categiry_filter_add_item">
                     {categories && categories.map(cat => {
                         return(
                             <li 
@@ -41,8 +33,8 @@ const FoodItems = (props) => {
                     <li onClick={() => setFilterCategory("")} className="categiry">All</li>
                 </div>
 
-                <div className="food_items">             
-                    {articles.foodItems && articles.foodItems.map(item => {
+                <div className="food_items food_items_additem">             
+                    {props.articles && props.articles.map(item => {
                         if(item.categoryName.includes(filterCategory)){
                             return(
                                 <div 
@@ -50,13 +42,21 @@ const FoodItems = (props) => {
                                     key={item.id} 
                                     id={item.categoryName.replace(/\s/g, "_")}
                                 >
-                                    <div className="menu_img">
-                                        <img src={item.image} />
-                                    </div>
                                     <div className="menu_left">
                                         <h1 className="menu_title">{item.title}</h1>
                                         <p className="menu_description">{item.body.slice(0, 55)}...</p>
                                         <p className="menu_price">${item.price}</p>
+                                    </div>
+        
+                                    <div className="menu_img">
+                                        <img 
+                                            src={
+                                                item.image.includes(BackendLink) ?
+                                                item.image :
+                                                `${BackendLink}${item.image}`
+                                            }
+                                            alt='img'
+                                        />
                                     </div>
                                 </div>
                             )
@@ -68,4 +68,4 @@ const FoodItems = (props) => {
     )
 }
 
-export default FoodItems
+export default ItemLists

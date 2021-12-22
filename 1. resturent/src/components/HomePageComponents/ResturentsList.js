@@ -2,6 +2,9 @@ import {React} from 'react';
 import { Link } from 'react-router-dom'
 
 const ResturentsList = (props) => {
+    if (!props.articles) return "Loading...";
+    if (!props.articles) return "Error!";
+    
     //Initial Rendearing
     return (
         <div className="resturents">

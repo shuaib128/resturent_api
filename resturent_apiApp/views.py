@@ -1,6 +1,6 @@
 from users.models import Profile
-from .models import Returent
-from .serializers import ResturentSerializer
+from .models import Returent, Item, Catrgory
+from .serializers import ResturentSerializer, ItemSerializer
 from rest_framework import serializers, viewsets
 from django_filters import rest_framework as filters
 from rest_framework.views import APIView
@@ -53,4 +53,36 @@ class ResturentCreateView(APIView):
 
         serilizer = ResturentSerializer(created_restorent)
 
+        return Response(serilizer.data)
+
+
+#Create New Food Item and add them
+class ItemCreateView(APIView):
+    parser_classes = [MultiPartParser, FormParser, JSONParser]
+    def post(self, request, format=None):
+        #make category instance
+        category = Catrgory()
+        category.title = request.data["Catogory"]
+        category.save()
+
+        #Make item instance
+        item = Item()
+        item.title = request.data["Name"]
+        item.body = request.data["Description"]
+        item.category = get_object_or_404(Catrgory, title=request.data["Catogory"])
+        item.price = request.data["Distance"]
+        try:
+            item.image = request.data["coverimage"]
+        except:
+            pass
+        item.save()
+
+        #Add item to resturent
+        resturent = get_object_or_404(Returent, id=request.data["resturent_id"])
+        created_item = get_object_or_404(Item, title=request.data["Name"])
+        resturent.foodItems.add(
+            created_item
+        )
+
+        serilizer = ItemSerializer(created_item)
         return Response(serilizer.data)

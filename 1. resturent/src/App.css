@@ -184,6 +184,10 @@ body img {
     padding-bottom: 10%;
 }
 
+.filter_responsive{
+    display: none;
+}
+
 .filter::-webkit-scrollbar {
     width: 10px;
 }
@@ -194,8 +198,6 @@ body img {
     grid-template-columns: 1fr 1fr 1fr;
     grid-gap: 3%;
 }
-
-.resturent {}
 
 .resturent_image {
     height: 157px;
@@ -246,7 +248,6 @@ body img {
     cursor: pointer;
 }
 
-.shorts ul {}
 
 .shorts ul li {
     display: flex;
@@ -357,7 +358,7 @@ body img {
     position: absolute;
     z-index: 4;
     top: 0;
-    left: -30%;
+    left: -100%;
     padding: 20px 26px;
 }
 
@@ -390,8 +391,6 @@ body img {
     left: 0;
 }
 
-.billbordImg {}
-
 .food_items {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -406,7 +405,7 @@ body img {
 
 .menu_item {
     display: flex;
-    height: 150px;
+    height: 190px;
     border: 1px solid rgb(226, 226, 226);
     cursor: pointer;
     transition: .3s;
@@ -431,8 +430,6 @@ body img {
     margin-top: 6px;
     margin-bottom: 9px;
 }
-
-.menu_price {}
 
 .menu_img {
     width: 40%;
@@ -720,4 +717,72 @@ body img {
 
 .res_add_button:disabled {
     background: #dddddd;
+}
+
+.food_Section_additem{
+    padding-top: 0px;
+}
+
+.food_items_additem{
+    grid-template-columns: 1fr 1fr;
+}
+
+.categiry_filter_add_item{
+    margin-bottom: 22px;
+}
+
+.current_city{
+    display: flex;
+    cursor: pointer;
+}
+
+.delever_now{
+    color: #5e5e5e;
+}
+
+.current_city svg{
+    margin-top: 1px;
+    margin-left: 5px;
+}
+
+.current_city_p{
+    font-weight: bold;
+}
+
+.res_header_down{
+    display: flex;
+    justify-content: space-between;
+}
+
+.delevary_options{
+
+}
+
+#delevary_options_{
+    font-size: 15px;
+    padding: 13px 18px;
+    border-radius: 50px;
+    background: #eeeeee;
+    border: 0;
+}
+
+.res_search{
+    margin-top: 20px;
+}
+
+.res_search .search_bar{
+    height: 54px;
+}
+
+.res_search .search_bar input{
+    width: 93%;
+}
+
+.header_response_div{
+    display: none;
+}
+
+
+.header_response{
+
 }

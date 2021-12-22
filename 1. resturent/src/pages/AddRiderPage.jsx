@@ -15,7 +15,6 @@ const AddRiderPage = (props) => {
         ID: props.ProfileItem.id
     })
     .then((res)=> {
-        console.log(res.data)
         if(res.data === "has_account"){
             setHaveAccount(true)
         }

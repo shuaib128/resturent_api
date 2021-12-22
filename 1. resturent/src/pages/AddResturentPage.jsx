@@ -5,8 +5,10 @@ import Header from "../Ulitilyts/Header";
 import HiddenHeader from "../Ulitilyts/HiddenHeader";
 import ResturentLists from '../components/AddResturentPage/ResturentLists'
 import ResturentAddForm from '../components/AddResturentPage/ResturentAddForm';
+import HeaderResponsive from '../Ulitilyts/HeaderResponsive';
 
 const AddResturentPage = (props) => {
+    const [searchData, setSearchData] = useState("");
     const [HaveAccount, setHaveAccount] = useState(false)
     if (!props.ProfileItem) return "Loading...";
     if (!props.ProfileItem) return "Error!";
@@ -15,15 +17,18 @@ const AddResturentPage = (props) => {
         check: "business",
         ID: props.ProfileItem.id
     })
-        .then((res) => {
-            if (res.data === "has_account") {
-                setHaveAccount(true)
-            }
-        })
+    .then((res) => {
+        if (res.data === "has_account") {
+            setHaveAccount(true)
+        }
+    })
 
     return (
         <>
             <Header id="show" />
+            <HeaderResponsive
+                passSearchData={setSearchData}
+            />
             <HiddenHeader
                 ProfileItem={props.ProfileItem}
                 UserItem={props.UserItem}

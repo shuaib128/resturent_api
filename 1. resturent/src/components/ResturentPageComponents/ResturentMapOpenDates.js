@@ -8,7 +8,6 @@ const ResturentMapOpenDates = (props) => {
     const tl = gsap.globalTimeline
     const store_longitude = props.store_longitude
     const store_latitude = props.store_latitude
-    console.log(store_longitude, store_latitude);
 
 
     const closemapmodel = () => {
