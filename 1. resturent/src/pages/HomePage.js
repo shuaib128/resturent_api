@@ -7,28 +7,26 @@ import HiddenHeader from '../Ulitilyts/HiddenHeader'
 import HeaderResponsive from '../Ulitilyts/HeaderResponsive';
 import { Token } from '../Api/Token';
 import APIService from '../Api/ApiServices';
+import ResturentsPreloaders from '../PreLoadersComponnets/ResturentsPreloaders';
 
 const HomePage = (props) => {
     //Fetch the list from djnago backend
     const [articles, setArticles] = useState([])
     const [searchData, setSearchData] = useState("");
-        
+
     useEffect(() => {
         APIService.GetAllArticels(Token, setArticles, searchData)
-    }, [searchData])
+    }, [])
 
 
     //Initial Rendearing
     return (
         <>
-            <Header 
-                passSearchData={setSearchData} 
+            <Header
                 id="show"
             />
 
-            <HeaderResponsive
-                passSearchData={setSearchData}
-            />
+            <HeaderResponsive />
 
             <div className="home_page_middle">
                 <Filter />
@@ -38,9 +36,12 @@ const HomePage = (props) => {
                     UserItem={props.UserItem}
                     ProfileID={props.ProfileID}
                 />
-                <ResturentsList 
-                    articles={articles} 
-                />
+                {articles.length !== 0 ?
+                    <ResturentsList
+                        articles={articles}
+                    /> :
+                    <ResturentsPreloaders />
+                }
             </div>
         </>
     )

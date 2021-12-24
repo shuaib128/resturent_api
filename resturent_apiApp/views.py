@@ -22,8 +22,6 @@ class ResturentViewSet(viewsets.ModelViewSet):
     # queryset = Returent.objects.filter(foodItems__category__title='Salads')
     serializer_class = ResturentSerializer
     filterset_class = SnippetFilter
-    # permission_classes = [IsAuthenticated]
-    # authentication_classes = (TokenAuthentication,)
 
 
 #Create New Resturent

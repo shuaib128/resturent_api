@@ -4,6 +4,7 @@ import ResturentMapOpenDates from './ResturentMapOpenDates';
 import { gsap } from 'gsap'
 import axios from 'axios';
 import { BackendLink } from '../../Api/BackendLink';
+import ResturentPreloader from '../../PreLoadersComponnets/ResturentPreloader';
 
 const ResturentBillBord = () => {
     //Fetch resturent data
@@ -22,7 +23,7 @@ const ResturentBillBord = () => {
         tl.to(full_map_box, .3, {visibility: 'visible', opacity: .6})
           .to(map_box, .2, {visibility: 'visible', opacity: 1})
     }
-    if (!articles) return "Loading...";
+    if (!articles) return <ResturentPreloader />;
     if (!articles) return "Error!";
 
     return (

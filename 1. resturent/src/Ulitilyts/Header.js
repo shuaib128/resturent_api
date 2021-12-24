@@ -1,8 +1,9 @@
 import React from 'react'
 import { gsap, Power3 } from 'gsap'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 
 const Header = (props) => {
+    const history = useHistory()
     const tl = gsap.globalTimeline
 
     //Menu apper
@@ -19,7 +20,9 @@ const Header = (props) => {
 
     //Search Funconality
     const search_ = (event) => {       
-        props.passSearchData(event.target.value);       
+        if(event.keyCode === 13){
+            history.push(`/search/query?q=${event.target.value}`)
+        }       
     }
 
     return (

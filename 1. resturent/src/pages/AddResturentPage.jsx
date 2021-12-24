@@ -6,11 +6,17 @@ import HiddenHeader from "../Ulitilyts/HiddenHeader";
 import ResturentLists from '../components/AddResturentPage/ResturentLists'
 import ResturentAddForm from '../components/AddResturentPage/ResturentAddForm';
 import HeaderResponsive from '../Ulitilyts/HeaderResponsive';
+import ResturentsPreloaders from '../PreLoadersComponnets/ResturentsPreloaders';
 
 const AddResturentPage = (props) => {
     const [searchData, setSearchData] = useState("");
     const [HaveAccount, setHaveAccount] = useState(false)
-    if (!props.ProfileItem) return "Loading...";
+
+    if (!props.ProfileItem) return(
+        <div style={{padding: "5%"}}>
+            <ResturentsPreloaders />
+        </div>
+    );
     if (!props.ProfileItem) return "Error!";
 
     axios.post(`${BackendLink}/api/users/checkbusiness`, {
@@ -49,7 +55,7 @@ const AddResturentPage = (props) => {
                         />
                     </div>
                 </div> :
-                <div>No</div>
+                <div></div>
             }
         </>
     )

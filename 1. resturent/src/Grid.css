@@ -108,6 +108,12 @@
     .full_re_add_view .food_Section{
         padding-top: 40px;
     }
+
+    .res-loders {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        padding-left: 0px;
+    }    
 }
 
 
@@ -167,5 +173,16 @@
 
     .create_business_right {
         width: 100%;
+    }
+
+    .res-loders {
+        display: grid;
+        grid-template-columns: 1fr;
+        padding-left: 0px;
+        grid-gap: 45px;
+    }
+
+    .loader-img{
+        height: 200px;
     }
 }

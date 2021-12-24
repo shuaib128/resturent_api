@@ -1,9 +1,10 @@
 import React from 'react'
 import { gsap, Power3 } from 'gsap'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import { ChevronDown, Filter } from 'lucide-react';
 
 const HeaderResponsive = (props) => {
+    const history = useHistory()
     const tl = gsap.globalTimeline
 
     //Menu apper
@@ -24,8 +25,10 @@ const HeaderResponsive = (props) => {
 
 
     //Search Funconality
-    const search_ = (event) => {
-        props.passSearchData(event.target.value);
+    const search_ = (event) => {       
+        if(event.keyCode === 13){
+            history.push(`/search/query?q=${event.target.value}`)
+        }       
     }
 
     return (

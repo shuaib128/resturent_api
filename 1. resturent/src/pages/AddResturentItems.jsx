@@ -7,6 +7,7 @@ import HiddenHeader from '../Ulitilyts/HiddenHeader'
 import AddFoodForm from '../components/AddFoodItemComponents/AddFoodForm'
 import HeaderResponsive from '../Ulitilyts/HeaderResponsive';
 import ItemLists from '../components/AddFoodItemComponents/ItemLists'
+import ResturentsPreloaders from '../PreLoadersComponnets/ResturentsPreloaders';
 
 const AddResturentItems = (props) => {
     const [searchData, setSearchData] = useState("");
@@ -18,7 +19,12 @@ const AddResturentItems = (props) => {
     }, [])
 
     const [HaveAccount, setHaveAccount] = useState(false)
-    if (!props.ProfileItem) return "Loading...";
+
+    if (!props.ProfileItem) return(
+        <div style={{padding: "5%"}}>
+            <ResturentsPreloaders />
+        </div>
+    );
     if (!props.ProfileItem) return "Error!";
 
     axios.post(`${BackendLink}/api/users/checkbusiness`, {
@@ -59,7 +65,7 @@ const AddResturentItems = (props) => {
                         />
                     </div>
                 </div> :
-                <div>No</div>
+                <div></div>
             }
         </>
     )
