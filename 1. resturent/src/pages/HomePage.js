@@ -15,7 +15,7 @@ const HomePage = (props) => {
     const [searchData, setSearchData] = useState("");
 
     useEffect(() => {
-        APIService.GetAllArticels(Token, setArticles, searchData)
+        APIService.GetAllArticels(Token, setArticles)
     }, [])
 
 

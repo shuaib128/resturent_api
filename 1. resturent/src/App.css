@@ -175,8 +175,8 @@ body img {
 }
 
 .filter {
-    width: 22%;
-    padding-right: 3%;
+    width: 24%;
+    padding-right: 0%;
     position: sticky;
     top: 15px;
     height: 100vh;
@@ -193,10 +193,15 @@ body img {
 }
 
 .resturents {
-    width: 100%;
+    width: 76%;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    grid-gap: 3%;
+    grid-gap: 2%;
+    height: fit-content;
+}
+
+.resturent{
+    margin-bottom: 30px;
 }
 
 .resturent_image {
@@ -236,6 +241,10 @@ body img {
     margin-top: -1px;
     margin-left: 11px;
     letter-spacing: 1px;
+}
+
+.resturent_des{
+    width: 75%;
 }
 
 .shorts {
@@ -405,10 +414,11 @@ body img {
 
 .menu_item {
     display: flex;
-    height: 190px;
+    height: 184px;
     border: 1px solid rgb(226, 226, 226);
     cursor: pointer;
     transition: .3s;
+    position: relative;
 }
 
 .menu_item:hover {
@@ -454,6 +464,11 @@ body img {
     padding: 0px 38px;
     right: 0;
     left: 0;
+}
+
+.menu_price{
+    position: absolute;
+    bottom: 11px;
 }
 
 .res_name {
@@ -858,4 +873,88 @@ body img {
     margin-top: 15px;
     border-radius: 5px;
     cursor: progress;
+}
+
+.no_res{
+    width: 100%;
+    padding: 21px 0px;
+}
+
+.no_res img{
+    width: 232px;
+    height: 200px;
+    margin: 0 auto;
+    display: block;
+}
+
+.no_res h1{
+    text-align: center;
+    margin-top: 22px;
+}
+
+.no_res p{
+    text-align: center;
+    margin-top: 5px;
+    font-size: 17px;
+    color: #646464;
+}
+
+.no_res a{
+    display: block;
+    text-align: center;
+    background: black;
+    width: 245px;
+    margin: 0 auto;
+    color: white;
+    padding: 14px 0px;
+    border-radius: 4px;
+    margin-top: 20px;
+}
+
+.food_modal{
+    display: none;
+    position: fixed;
+    width: 600px;
+    background: white;
+    top: 50%;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+    overflow: scroll;
+    height: 95vh;
+    z-index: 20;
+}
+
+.modal_background{
+    display: none;
+    opacity: 0.6;
+    position: fixed;
+    background: black;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    z-index: 12;
+}
+
+.modal_image{
+    height: 300px;
+}
+
+.foodModal_des{
+    background: white;
+    padding: 18px 20px;
+}
+
+.food_modal_title{
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.food_modal_des{
+    color: #626262;
+    margin-top: 9px;
 }

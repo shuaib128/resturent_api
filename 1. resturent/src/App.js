@@ -88,7 +88,7 @@ function App() {
             <Route exact path='/add/item/:id' render={() => <AddResturentItems
               ProfileItem={ProfileItem} UserItem={UserItem}
             />} />
-            <Route exact path='/search/:str' render={() => <SearchPage 
+            <Route exact path='/search/:str' render={() => <SearchPage
               ProfileItem={ProfileItem} UserItem={UserItem}
               ProfileID={ProfileID}
             />} />

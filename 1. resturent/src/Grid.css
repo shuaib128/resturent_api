@@ -39,6 +39,14 @@
     .full_re_add_view{
         margin-top: 23px
     }
+
+    .resturents {
+        width: 100%;
+    }
+
+    .resturent_des{
+        width: 100%;
+    }
 }
 
 
@@ -50,6 +58,7 @@
         display: grid;
         grid-template-columns: 1fr 1fr;
         grid-gap: 3%;
+        padding-left: 0%;
     }   
     
     .resturent_image {
@@ -184,5 +193,23 @@
 
     .loader-img{
         height: 200px;
+    }
+
+    .resturent {
+        margin-bottom: 5px;
+    }
+
+    .no_res h1 {
+        margin-bottom: 22px;
+        font-size: 26px;
+    }
+
+    .no_res img {
+        width: auto;
+        height: auto;
+    }
+
+    .no_res a {
+        width: 100%;
     }
 }

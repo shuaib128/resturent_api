@@ -2,8 +2,8 @@ import { BackendLink } from "./BackendLink"
 
 export default class APIService{
     //Get all article datas
-    static GetAllArticels(token, article_state, search_data){
-        fetch(`${BackendLink}/api/restaurants/?foodItems__category__title__icontains=${search_data}`, {
+    static GetAllArticels(token, article_state){
+        fetch(`${BackendLink}/api/restaurants/`, {
         'method': 'GET',
         headers: {
             'Content-Type':'application/json',
@@ -12,10 +12,7 @@ export default class APIService{
         })
         .then(resp => resp.json())
         .then(resp => {
-            //Filter by search query
-            const ids = resp.map(o => o.id)
-            const unique_articles = resp.filter(({id}, index) => !ids.includes(id, index + 1))
-            article_state(unique_articles)
+            article_state(resp)
         })
         .catch(error => console.log(error))
     }

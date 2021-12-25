@@ -7,24 +7,59 @@ from rest_framework.views import APIView
 from rest_framework.parsers import JSONParser, MultiPartParser, FormParser
 from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
+from rest_framework.permissions import (
+    SAFE_METHODS, 
+    BasePermission,
+)
+from rest_framework import generics
 
 
-class SnippetFilter(filters.FilterSet):
-    class Meta:
-        model = Returent
-        fields = {
-            'foodItems__category__title': ['icontains'],
-        }
+#Custom permissions
+class PostUserWritePermission(BasePermission):
+    message = 'Editing posts is restricted to the author only.'
+
+    def has_object_permission(self, request, view, obj):
+        if request.method in SAFE_METHODS:
+            return True
+
+        return obj.auhtor == request.user
+
+
 
 # Create your views here.
-class ResturentViewSet(viewsets.ModelViewSet):
+class ResturentsViewSet(APIView):
+    parser_classes = [MultiPartParser, FormParser, JSONParser]
+    def get(self, request, format=None):
+        restorents = Returent.objects.all()
+
+        serilizer = ResturentSerializer(restorents, many=True)
+        return Response(serilizer.data)
+
+
+
+#############Single resturent############
+class ResturentViewSet(generics.RetrieveUpdateDestroyAPIView):
+    permission_classes = [PostUserWritePermission]
     queryset = Returent.objects.all()
-    # queryset = Returent.objects.filter(foodItems__category__title='Salads')
     serializer_class = ResturentSerializer
-    filterset_class = SnippetFilter
 
 
-#Create New Resturent
+#############Search View################
+class ResturentsSearchViewSet(APIView):
+    parser_classes = [MultiPartParser, FormParser, JSONParser]
+    def post(self, request, format=None):
+        search_query = request.data["search_query"]["q"]
+        restorent = Returent.objects.filter(foodItems__category__title=search_query)
+
+        if len(list(restorent)) != 0:
+            serilizer = ResturentSerializer(restorent, many=True)
+            return Response(serilizer.data)
+        else:
+            return Response("No Resturent")
+
+
+
+###################Create New Resturent#################
 class ResturentCreateView(APIView):
     parser_classes = [MultiPartParser, FormParser, JSONParser]
     def post(self, request, format=None):
@@ -54,7 +89,8 @@ class ResturentCreateView(APIView):
         return Response(serilizer.data)
 
 
-#Create New Food Item and add them
+
+###########Create New Food Item and add them##############
 class ItemCreateView(APIView):
     parser_classes = [MultiPartParser, FormParser, JSONParser]
     def post(self, request, format=None):

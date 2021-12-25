@@ -5,18 +5,31 @@ import Filter from '../components/HomePageComponents/Filter';
 import FilterResponsive from '../components/HomePageComponents/FilterResponsive';
 import HiddenHeader from '../Ulitilyts/HiddenHeader'
 import HeaderResponsive from '../Ulitilyts/HeaderResponsive';
-import { Token } from '../Api/Token';
-import APIService from '../Api/ApiServices';
+import Nodata from '../components/SearchPageComponents/Nodata';
 import ResturentsPreloaders from '../PreLoadersComponnets/ResturentsPreloaders';
+import { BackendLink } from '../Api/BackendLink';
+import axios from 'axios';
 
 const SearchPage = (props) => {
     const [articles, setArticles] = useState([])
-    const urlSearchParams = new URLSearchParams(window.location.search)
+    const [result_status, setresult_status] = useState([])
+
     //Get query from the url
+    const urlSearchParams = new URLSearchParams(window.location.search)
     const params = Object.fromEntries(urlSearchParams.entries());
 
     useEffect(() => {
-        APIService.GetAllArticels(Token, setArticles, params.q)
+        axios.post(`${BackendLink}/api/restaurants/resturent/search/`, {
+            search_query: params
+        })
+            .then((res) => {
+                if (res.data !== "No Resturent") {
+                    setArticles(res.data);
+                }
+                else {
+                    setresult_status(res.data);
+                }
+            })
     }, [])
 
 
@@ -40,7 +53,9 @@ const SearchPage = (props) => {
                     <ResturentsList
                         articles={articles}
                     /> :
-                    <ResturentsPreloaders />
+                    articles.length === 0 && result_status !== "No Resturent" ? <ResturentsPreloaders /> :
+                        result_status === "No Resturent" ? <Nodata params={params} /> :
+                            <div></div>
                 }
             </div>
         </>

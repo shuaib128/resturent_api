@@ -1,4 +1,4 @@
-import {React} from 'react';
+import { React } from 'react';
 import { Link } from 'react-router-dom'
 import { BackendLink } from '../../Api/BackendLink';
 
@@ -7,27 +7,27 @@ const ResturentLists = (props) => {
     return (
         <div className="resturents">
             {props.articles && props.articles.map(article => {
-                return(
+                return (
                     <div className="resturent" key={article.id}>
                         <div className="resturent_image">
                             <Link to={'/add/item/' + article.id}>
-                                <img src={BackendLink + article.image} alt="food"/>
+                                <img src={BackendLink + article.image} alt="food" />
                             </Link>
                         </div>
 
                         <div className="name_revue">
                             <h2 className="resturent_name">
-                                <Link to={'/returent/'+article.id}>
+                                <Link to={'/returent/' + article.id}>
                                     {article.title.slice(0, 25)}...
                                 </Link>
                             </h2>
-                            <p className="revew">4.7</p>    
-                        </div> 
+                            <p className="revew">4.7</p>
+                        </div>
 
                         <div className="distance">
-                            <img className="dis_icon" src="/images/distance.png" alt="food"/>
+                            <img className="dis_icon" src="/images/distance.png" alt="food" />
                             <p className="dis">{article.distance}</p>
-                        </div>                     
+                        </div>
                     </div>
                 )
             })}

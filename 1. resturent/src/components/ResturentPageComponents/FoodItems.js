@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom'
 import { Token } from '../../Api/Token';
 import APIService from '../../Api/ApiServices';
 import ResturentsPreloaders from '../../PreLoadersComponnets/ResturentsPreloaders';
+import FoodModal from './FoodModal';
 
 const FoodItems = (props) => {
     var categories = []
@@ -22,9 +23,31 @@ const FoodItems = (props) => {
     }
     categories = [...new Set(categories)];
 
+    //Modal apper function
+    const modealApper = (event) => {
+        var target_element = event.target.parentElement.parentElement.nextSibling
+        var model_background = document.querySelector(".modal_background")
+
+        target_element.style.display = "block"
+        model_background.style.display = "block"
+    }
+
+    const modalDissaple = (event) => {
+        var target_element = document.querySelectorAll(".food_modal")
+        var model_background = document.querySelector(".modal_background")
+
+        console.log(target_element);
+        for (var i = 0, len = target_element.length; i < len; i++) {
+            target_element[i].style.display = "none"
+        }
+        model_background.style.display = "none"
+    }
+
 
     return (
         <>
+            <div className='modal_background' onClick={modalDissaple}></div>
+
             <div className="food_Section">
                 <div className="categiry_filter">
                     {categories && categories.map(cat => {
@@ -47,24 +70,34 @@ const FoodItems = (props) => {
                         {articles.foodItems && articles.foodItems.map(item => {
                             if (item.categoryName.includes(filterCategory)) {
                                 return (
-                                    <div
-                                        className="menu_item"
-                                        key={item.id}
-                                        id={item.categoryName.replace(/\s/g, "_")}
-                                    >
-                                        <div className="menu_img">
-                                            <img src={item.image} />
+                                    <div>
+                                        <div
+                                            className="menu_item"
+                                            key={item.id}
+                                            id={item.categoryName.replace(/\s/g, "_")}
+                                        >
+                                            <div className="menu_img">
+                                                <img src={item.image} />
+                                            </div>
+                                            <div className="menu_left">
+                                                <h1 className="menu_title"
+                                                    onClick={modealApper}
+                                                >
+                                                    {item.title.slice(0, 30)}...
+                                                </h1>
+                                                <p className="menu_description">{item.body.slice(0, 55)}...</p>
+                                                <p className="menu_price">${item.price}</p>
+                                            </div>
                                         </div>
-                                        <div className="menu_left">
-                                            <h1 className="menu_title">{item.title}</h1>
-                                            <p className="menu_description">{item.body.slice(0, 55)}...</p>
-                                            <p className="menu_price">${item.price}</p>
-                                        </div>
+
+                                        <FoodModal
+                                            item={item}
+                                        />
                                     </div>
                                 )
                             }
                         })}
-                    </div>:
+                    </div> :
                     <ResturentsPreloaders />
                 }
             </div>
