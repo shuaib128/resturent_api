@@ -5,6 +5,8 @@ import Header from "../Ulitilyts/Header";
 import HiddenHeader from "../Ulitilyts/HiddenHeader";
 
 const AddRiderPage = (props) => {
+    document.body.style.cssText = "height: unset; overflow: unset"
+    
     const [HaveAccount, setHaveAccount] = useState(false)
     if (!props.ProfileItem) return "Loading...";
     if (!props.ProfileItem) return "Error!";

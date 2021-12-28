@@ -120,3 +120,13 @@ class ItemCreateView(APIView):
 
         serilizer = ItemSerializer(created_item)
         return Response(serilizer.data)
+
+
+class AddItemStructorView(APIView):
+    parser_classes = [MultiPartParser, FormParser, JSONParser]
+    def post(self, request, format=None):
+        foodItem = get_object_or_404(Item, id=request.data["item_id"])
+        foodItem.item_structor = request.data["structor"]
+        foodItem.save()
+
+        return Response("serilizer.data")

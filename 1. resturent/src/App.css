@@ -518,6 +518,7 @@ body img {
     background: black;
     opacity: 0;
     visibility: hidden;
+    z-index: 2;
 }
 
 .map_open_date {
@@ -531,6 +532,7 @@ body img {
     transform: translate(-50%, -50%);
     opacity: 0;
     visibility: hidden;
+    z-index: 3;
 }
 
 #res_location_map {
@@ -769,10 +771,6 @@ body img {
     justify-content: space-between;
 }
 
-.delevary_options{
-
-}
-
 #delevary_options_{
     font-size: 15px;
     padding: 13px 18px;
@@ -797,10 +795,6 @@ body img {
     display: none;
 }
 
-
-.header_response{
-
-}
 
 .loading_img{
     width: 120px;
@@ -916,15 +910,15 @@ body img {
     position: fixed;
     width: 600px;
     background: white;
-    top: 50%;
+    top: 51%;
     bottom: 0;
     left: 0;
     right: 0;
     margin: 0 auto;
     -webkit-transform: translateY(-50%);
     transform: translateY(-50%);
-    overflow: scroll;
-    height: 95vh;
+    overflow-y: scroll;
+    height: 98vh;
     z-index: 20;
 }
 
@@ -947,6 +941,7 @@ body img {
 .foodModal_des{
     background: white;
     padding: 18px 20px;
+    padding-bottom: 90px;
 }
 
 .food_modal_title{
@@ -957,4 +952,72 @@ body img {
 .food_modal_des{
     color: #626262;
     margin-top: 9px;
+}
+
+.custom_forms{
+    margin-top: 20px;
+}
+
+
+.create_type{
+    display: block;
+    background: black;
+    color: white;
+    border: 0;
+    padding: 10px 13px;
+    border-radius: 3px; 
+    margin-top: 25px; 
+    cursor: pointer;  
+}
+
+.create_round{
+    display: block;
+    background: black;
+    color: white;
+    padding: 6px 7px;
+    border-radius: 100px;
+    border: 0px;
+    cursor: pointer;
+    position: relative;
+    left: 89.5%;
+}
+
+.adextransp{
+    width: fit-content;
+    position: relative;
+    left: 85%;
+    top: 18px;
+}
+
+.main_type{
+    width: 96%;
+    height: 31px;
+    padding: 10px;
+    font-size: 17px;
+    margin-top: 17px;
+}
+
+.add_btn{
+    margin-top: 6px;
+    background: black;
+    color: white;
+    border: 0;
+    padding: 7px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.main_sub_type{
+    width: 82%;
+    height: 30px;
+    margin-top: 7px;
+    margin-right: 4px;
+    padding-left: 10px;
+}
+
+.main_sub_price{
+    width: 10%;
+    height: 30px;
+    padding-left: 10px;
+    margin-top: 7px;
 }

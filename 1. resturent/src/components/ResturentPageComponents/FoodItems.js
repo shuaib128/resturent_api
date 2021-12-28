@@ -32,11 +32,11 @@ const FoodItems = (props) => {
         model_background.style.display = "block"
     }
 
+    //Modal dissper function
     const modalDissaple = (event) => {
         var target_element = document.querySelectorAll(".food_modal")
         var model_background = document.querySelector(".modal_background")
 
-        console.log(target_element);
         for (var i = 0, len = target_element.length; i < len; i++) {
             target_element[i].style.display = "none"
         }

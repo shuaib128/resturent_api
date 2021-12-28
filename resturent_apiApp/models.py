@@ -17,6 +17,7 @@ class Item(models.Model):
     image = models.ImageField(null=True, blank=True, upload_to='media/dineinImages',)
     category = models.ForeignKey(Catrgory, on_delete=models.CASCADE)
     price = MoneyField( decimal_places=2, default=0, default_currency='USD', max_digits=11)
+    item_structor = models.TextField(default='[["ssss","sss","23"]]', null=True, blank=True,)
 
     def __str__(self):
         return self.title

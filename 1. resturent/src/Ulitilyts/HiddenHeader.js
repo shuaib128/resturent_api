@@ -15,6 +15,8 @@ const HiddenHeader = (props) => {
         menu.style.zIndex = 20
         tl.to(hidden_header, .3, { opacity: 0, visibility: 'hidden', delay: .3 })
             .to(main_menu, .4, { left: '-100%', ease: Power3.easeOut })
+
+        document.body.style.cssText = "height: unset; overflow: unset"
     }
 
     //Logout function

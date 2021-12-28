@@ -15,6 +15,8 @@ const Header = (props) => {
         menu.style.zIndex = 0
         tl.to(hidden_header, .3, {visibility: 'visible', opacity: .6})
           .to(main_menu, .4, {left: 0, ease: Power3.easeOut, delay: .2})
+
+        document.body.style.cssText = "height: 100vh; overflow: hidden"
     }
 
 

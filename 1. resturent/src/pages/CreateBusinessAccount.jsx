@@ -4,6 +4,8 @@ import jwt_decode from "jwt-decode";
 import { BackendLink } from '../Api/BackendLink'
 
 const CreateBusinessAccount = () => {
+    document.body.style.cssText = "height: unset; overflow: unset"
+    
     const BusinessAccountHandler = () => {
         const accestoken = localStorage.getItem("accestoken")
         const content_decoded = jwt_decode(accestoken)
