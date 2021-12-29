@@ -8,7 +8,15 @@ class ItemSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Item
-        fields = ('id', 'title', 'body', 'image', 'categoryName', 'price')
+        fields = (
+            'id', 
+            'title', 
+            'body', 
+            'image', 
+            'categoryName', 
+            'price', 
+            'item_structor'
+        )
 
 class ResturentSerializer(serializers.ModelSerializer):
     foodItems = ItemSerializer(many=True)

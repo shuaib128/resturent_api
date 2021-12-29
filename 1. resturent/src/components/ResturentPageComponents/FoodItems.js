@@ -77,7 +77,7 @@ const FoodItems = (props) => {
                                             id={item.categoryName.replace(/\s/g, "_")}
                                         >
                                             <div className="menu_img">
-                                                <img src={item.image} />
+                                                <img src={item.image} alt='imgr' />
                                             </div>
                                             <div className="menu_left">
                                                 <h1 className="menu_title"

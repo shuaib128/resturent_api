@@ -1021,3 +1021,8 @@ body img {
     padding-left: 10px;
     margin-top: 7px;
 }
+
+.extras{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
