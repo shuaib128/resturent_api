@@ -20,7 +20,7 @@ class Item(models.Model):
     item_structor = models.TextField(default='[["ssss","sss","23"]]', null=True, blank=True,)
 
     def __str__(self):
-        return self.title
+        return f"{self.title}-{self.id}"
 
     def save(self, *args, **kwargs):
         super(Item, self).save(*args, **kwargs)
@@ -35,7 +35,7 @@ class Item(models.Model):
 class Returent(models.Model):
     title = models.CharField(max_length=200)
     body = models.TextField()
-    image = models.ImageField(null=True, blank=True, upload_to='media/dineinImages',)
+    image = models.ImageField(null=True, blank=True, upload_to='media/dineinImages', default='media/dineinImages/pexels-adonyi-gábor-1414651_1cjSUoF.jpg')
     foodItems = models.ManyToManyField(
         Item,
         related_name='foodsItem',
@@ -48,7 +48,7 @@ class Returent(models.Model):
     store_latitude  = models.FloatField(default=0)
 
     def __str__(self):
-        return self.title
+        return f"{self.title}-{self.id}"
 
     def save(self, *args, **kwargs):
         super(Returent, self).save(*args, **kwargs)

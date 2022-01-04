@@ -5,6 +5,7 @@ import { BackendLink } from '../../Api/BackendLink';
 const ResturentsList = (props) => {
     if (!props.articles) return "Loading...";
     if (!props.articles) return "Error!";
+    if (!props.articles) return "Error!";
     
     //Initial Rendearing
     return (
@@ -14,14 +15,17 @@ const ResturentsList = (props) => {
                     <div className="resturent" key={article.id}>
                         <div className="resturent_image">
                             <Link to={'/returent/'+article.id}>
-                                <img src={BackendLink + article.image} alt="food"/>
+                                <img 
+                                    src={BackendLink + "/media/" + article.image} 
+                                    alt="food"
+                                />
                             </Link>
                         </div>
 
                         <div className="name_revue">
                             <h2 className="resturent_name">
                                 <Link to={'/returent/'+article.id}>
-                                    {article.title.slice(0, 25)}...
+                                    {article.title}
                                 </Link>
                             </h2>
                             <p className="revew">4.7</p>    

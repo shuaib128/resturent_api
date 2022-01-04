@@ -1,8 +1,6 @@
 from users.models import Profile
 from .models import Returent, Item, Catrgory
 from .serializers import ResturentSerializer, ItemSerializer
-from rest_framework import serializers, viewsets
-from django_filters import rest_framework as filters
 from rest_framework.views import APIView
 from rest_framework.parsers import JSONParser, MultiPartParser, FormParser
 from rest_framework.response import Response
@@ -12,6 +10,8 @@ from rest_framework.permissions import (
     BasePermission,
 )
 from rest_framework import generics
+from django.core.paginator import Paginator
+from django.http import JsonResponse
 
 
 #Custom permissions
@@ -29,11 +29,19 @@ class PostUserWritePermission(BasePermission):
 # Create your views here.
 class ResturentsViewSet(APIView):
     parser_classes = [MultiPartParser, FormParser, JSONParser]
-    def get(self, request, format=None):
+    def post(self, request, format=None):
         restorents = Returent.objects.all()
 
-        serilizer = ResturentSerializer(restorents, many=True)
-        return Response(serilizer.data)
+        paginator = Paginator(restorents, 20)
+        page_number = request.data["pagenum"]
+        print(page_number)
+
+        if page_number:
+            if int(page_number) <= paginator.num_pages:
+                obj_list = paginator.get_page(page_number)
+                obj_list = obj_list.object_list.values()
+
+                return JsonResponse(list(obj_list), status=200, safe=False)
 
 
 

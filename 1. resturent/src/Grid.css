@@ -57,7 +57,7 @@
         width: 100%;
         display: grid;
         grid-template-columns: 1fr 1fr;
-        grid-gap: 3%;
+        grid-gap: 20px;
         padding-left: 0%;
     }   
     
@@ -136,7 +136,7 @@
         width: 100%;
         display: grid;
         grid-template-columns: 1fr;
-        grid-gap: 3%;
+        grid-gap: 21px;
     }   
     
     .resturent_image {

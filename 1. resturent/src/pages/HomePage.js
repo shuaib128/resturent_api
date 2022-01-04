@@ -5,17 +5,39 @@ import Filter from '../components/HomePageComponents/Filter';
 import FilterResponsive from '../components/HomePageComponents/FilterResponsive';
 import HiddenHeader from '../Ulitilyts/HiddenHeader'
 import HeaderResponsive from '../Ulitilyts/HeaderResponsive';
-import { Token } from '../Api/Token';
-import APIService from '../Api/ApiServices';
 import ResturentsPreloaders from '../PreLoadersComponnets/ResturentsPreloaders';
+import axios from 'axios';
+import { BackendLink } from '../Api/BackendLink';
 
 const HomePage = (props) => {
     //Fetch the list from djnago backend
-    const [articles, setArticles] = useState([])
+    const [pagenum, setpagenum] = useState(1)
+    const [articles, setArticles] = useState(() => {
+        axios.post(`${BackendLink}/api/restaurants/`, {
+            pagenum: pagenum
+        })
+            .then((res) => {
+                setArticles(res.data);
+            })
+    })
     const [searchData, setSearchData] = useState("");
 
+
+
     useEffect(() => {
-        APIService.GetAllArticels(Token, setArticles)
+        //Scroll event
+        window.onscroll = function () {
+            if (window.innerHeight + window.pageYOffset >= document.body.offsetHeight - 5) {
+                setpagenum((prevstate) => prevstate + 1)
+
+                axios.post(`${BackendLink}/api/restaurants/`, {
+                    pagenum: pagenum
+                })
+                    .then((res) => {
+                        console.log(res.data);
+                    })
+            }
+        }
     }, [])
 
 
@@ -36,7 +58,7 @@ const HomePage = (props) => {
                     UserItem={props.UserItem}
                     ProfileID={props.ProfileID}
                 />
-                {articles.length !== 0 ?
+                {articles ?
                     <ResturentsList
                         articles={articles}
                     /> :

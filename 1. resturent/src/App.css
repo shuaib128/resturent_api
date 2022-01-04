@@ -196,8 +196,7 @@ body img {
     width: 76%;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    grid-gap: 2%;
-    height: fit-content;
+    grid-gap: 20px;
 }
 
 .resturent{

@@ -25,6 +25,8 @@ const LogInPage = (props) => {
         try {
 
             if (content === "UNIQUE constraint failed: auth_user.username") {
+                document.querySelector(".login_loading").style.display = "none"
+                document.querySelector(".logIn_form_div").style.display = "block"
                 document.querySelector(".usernameerror").style.display = "block"
             }
             const content_decoded = jwt_decode(content.access)
@@ -34,6 +36,8 @@ const LogInPage = (props) => {
             history.push("/")
         } catch {
             document.querySelector(".length_error").style.display = "block"
+            document.querySelector(".login_loading").style.display = "none"
+            document.querySelector(".logIn_form_div").style.display = "block"
         }
     }
 

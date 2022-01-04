@@ -1,53 +1,16 @@
-import React, { useEffect, useState } from 'react'
-import { Plus } from 'lucide-react';
-import axios from 'axios';
+import React, { useState } from 'react'
+import { Plus } from 'lucide-react'
+import axios from 'axios'
 import { BackendLink } from '../../Api/BackendLink'
 
 const AddItemModal = (props) => {
     const [IsSubmit, setIsSubmit] = useState(false)
     const input_structre = JSON.parse(props.item.item_structor)
 
+
     var file_structure_object = []
     var one = []
 
-
-    useEffect(() => {
-        /**
-         * Make a new form for a new type
-         */
-        var types_dom = document.querySelector(`.types_${props.item.id}`)
-
-        input_structre.map((item, index) => {
-            types_dom.innerHTML += `
-                <form id="type_div">
-                    <input class="main_type" placeholder="type" />
-                </form>
-                <button class="add_btn">Add</button>
-            `
-
-            // item.map((menu, index) => {
-            //     if(index !== 0){
-            //         console.log(types_dom);
-            //     }
-            // })
-        })
-
-        /**
-         * create a subtipe with in the main type
-         */
-        var sub_input_btns = document.querySelectorAll(".add_btn")
-        console.log(sub_input_btns);
-        for (var i = 0; i < sub_input_btns.length; i++) {
-            sub_input_btns[i].addEventListener('click', function (e) {
-                e.target.previousSibling.previousSibling.innerHTML += `
-                     <form>
-                         <input class="main_sub_type" placeholder="sub-type" />
-                         <input class="main_sub_price" type="number" placeholder="price" />
-                     </form>
-                 `
-            }, false)
-        }
-    }, [])
 
     const create_type = (id) => {
         setIsSubmit(true)
@@ -69,19 +32,24 @@ const AddItemModal = (props) => {
         for (var i = 0; i < sub_input_btns.length; i++) {
             sub_input_btns[i].addEventListener('click', function (e) {
                 e.target.previousSibling.previousSibling.innerHTML += `
-                    <form>
-                        <input class="main_sub_type" placeholder="sub-type" />
-                        <input class="main_sub_price" type="number" placeholder="price" />
-                    </form>
+                    <input class="main_sub_type" placeholder="sub-type" />
+                    <input class="main_sub_price" type="number" placeholder="price" />
                 `
             }, false)
         }
     }
 
+    const create_sub_type_ = (e) => {
+        e.target.previousSibling.innerHTML += `
+            <input class="main_sub_type" placeholder="sub-type" />
+            <input class="main_sub_price" type="number" placeholder="price" />
+        `
+    }
+
 
     /**Submit after all input filled */
     const submit_types = (id) => {
-        var forms = document.querySelectorAll(`#type_div`)
+        var forms = document.querySelector(`.types_${id}`).querySelectorAll(`#type_div`)
 
         for (var i = 0; i < forms.length; i++) {
             one = []
@@ -109,7 +77,42 @@ const AddItemModal = (props) => {
                 <p className='food_modal_des'>{props.item.body}</p>
 
                 <div className="custom_forms">
-                    <div className={"types_ types_" + props.item.id}> </div>
+                    <div className={"types_ types_" + props.item.id}>
+                        {input_structre.map((item, index) => (
+                            <>
+                                <form id="type_div" key={index}>
+                                    <input 
+                                        class="main_type" 
+                                        placeholder={item[0]}
+                                        onChange={() => setIsSubmit(true)}
+                                    />
+
+                                    {item.map((menu, index) => {
+                                        if (index !== 0) {
+                                            return (
+                                                <>
+                                                    {index % 2 !== 0 ?
+                                                        <input
+                                                            class="main_sub_type"
+                                                            placeholder={menu}
+                                                            onChange={() => setIsSubmit(true)}
+                                                        /> :
+                                                        <input
+                                                            class="main_sub_price"
+                                                            type="number"
+                                                            placeholder={menu}
+                                                            onChange={() => setIsSubmit(true)}
+                                                        />
+                                                    }
+                                                </>
+                                            )
+                                        }
+                                    })}
+                                </form>
+                                <button onClick={create_sub_type_} class="add_btn">Add</button>
+                            </>
+                        ))}
+                    </div>
 
                     <p className='adextransp'>Add Extras</p>
                     <button className='create_type create_round'
