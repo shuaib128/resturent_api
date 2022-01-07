@@ -61,7 +61,7 @@ MIDDLEWARE = [
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
-    "https://shu-res.netlify.app",
+    "https://shusocial.loca.lt",
 ]
 
 ROOT_URLCONF = 'resturent_api.urls'

@@ -51,7 +51,6 @@ const HomePage = (props) => {
             }
         }
     }
-    console.log(articles && articles.length);
 
 
     //Initial Rendearing

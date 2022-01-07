@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Header from '../Ulitilyts/Header'
-import ResturentsList from '../components/HomePageComponents/ResturentsList';
+import SearchResults from '../components/SearchPageComponents/SearchResults';
 import Filter from '../components/HomePageComponents/Filter';
 import FilterResponsive from '../components/HomePageComponents/FilterResponsive';
 import HiddenHeader from '../Ulitilyts/HiddenHeader'
@@ -50,7 +50,7 @@ const SearchPage = (props) => {
                     ProfileID={props.ProfileID}
                 />
                 {articles.length !== 0 ?
-                    <ResturentsList
+                    <SearchResults
                         articles={articles}
                     /> :
                     articles.length === 0 && result_status !== "No Resturent" ? <ResturentsPreloaders /> :
