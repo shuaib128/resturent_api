@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Header from '../Ulitilyts/Header'
 import ResturentsList from '../components/HomePageComponents/ResturentsList';
 import Filter from '../components/HomePageComponents/Filter';
@@ -21,24 +21,37 @@ const HomePage = (props) => {
             })
     })
     const [searchData, setSearchData] = useState("");
+    const [LoaingPost, setLoaingPost] = useState(true)
 
 
-
-    useEffect(() => {
-        //Scroll event
-        window.onscroll = function () {
-            if (window.innerHeight + window.pageYOffset >= document.body.offsetHeight - 5) {
-                setpagenum((prevstate) => prevstate + 1)
+    //Scroll event
+    window.onscroll = function () {
+        if (window.scrollY > (document.body.offsetHeight - window.outerHeight)) {
+            if (LoaingPost) {
+                setLoaingPost(false)
+                setpagenum((prevstate) => prevstate !== 1 ? prevstate + 1 : prevstate + 2)
 
                 axios.post(`${BackendLink}/api/restaurants/`, {
                     pagenum: pagenum
                 })
                     .then((res) => {
-                        console.log(res.data);
+                        setArticles(e => {
+                            try {
+                                return [...articles, ...res.data]
+                            } catch (error) {
+                                axios.post(`${BackendLink}/api/restaurants/`, {
+                                    pagenum: pagenum
+                                }).then((res) => {
+                                    setArticles(res.data);
+                                })
+                            }
+                        })
+                        setLoaingPost(true)
                     })
             }
         }
-    }, [])
+    }
+    console.log(articles && articles.length);
 
 
     //Initial Rendearing
@@ -65,6 +78,12 @@ const HomePage = (props) => {
                     <ResturentsPreloaders />
                 }
             </div>
+
+            {!LoaingPost ?
+                <div className="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
+                :
+                ''
+            }
         </>
     )
 }

@@ -32,7 +32,7 @@ class ResturentsViewSet(APIView):
     def post(self, request, format=None):
         restorents = Returent.objects.all()
 
-        paginator = Paginator(restorents, 20)
+        paginator = Paginator(restorents, 12)
         page_number = request.data["pagenum"]
         print(page_number)
 

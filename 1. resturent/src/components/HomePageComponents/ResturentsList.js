@@ -10,9 +10,9 @@ const ResturentsList = (props) => {
     //Initial Rendearing
     return (
         <div className="resturents">
-            {props.articles && props.articles.map(article => {
+            {props.articles && props.articles.map((article, index) => {
                 return(
-                    <div className="resturent" key={article.id}>
+                    <div className="resturent" key={index}>
                         <div className="resturent_image">
                             <Link to={'/returent/'+article.id}>
                                 <img 
