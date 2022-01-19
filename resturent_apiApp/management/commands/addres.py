@@ -1,10 +1,6 @@
 import os
-from django.core.management.base import BaseCommand, CommandError
+from django.core.management.base import BaseCommand
 from resturent_apiApp.models import Returent
-from pathlib import Path
-
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
 
 class Command(BaseCommand):
     def handle(self, *args, **options):

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useCallback } from 'react';
 import Header from '../Ulitilyts/Header'
 import ResturentsList from '../components/HomePageComponents/ResturentsList';
 import Filter from '../components/HomePageComponents/Filter';
@@ -24,35 +24,6 @@ const HomePage = (props) => {
     const [LoaingPost, setLoaingPost] = useState(true)
 
 
-    //Scroll event
-    window.onscroll = function () {
-        if (window.scrollY > (document.body.offsetHeight - window.outerHeight)) {
-            if (LoaingPost) {
-                setLoaingPost(false)
-                setpagenum((prevstate) => prevstate !== 1 ? prevstate + 1 : prevstate + 2)
-
-                axios.post(`${BackendLink}/api/restaurants/`, {
-                    pagenum: pagenum
-                })
-                    .then((res) => {
-                        setArticles(e => {
-                            try {
-                                return [...articles, ...res.data]
-                            } catch (error) {
-                                axios.post(`${BackendLink}/api/restaurants/`, {
-                                    pagenum: pagenum
-                                }).then((res) => {
-                                    setArticles(res.data);
-                                })
-                            }
-                        })
-                        setLoaingPost(true)
-                    })
-            }
-        }
-    }
-
-
     //Initial Rendearing
     return (
         <>
@@ -73,6 +44,11 @@ const HomePage = (props) => {
                 {articles ?
                     <ResturentsList
                         articles={articles}
+                        LoaingPost={LoaingPost}
+                        setLoaingPost={setLoaingPost}
+                        pagenum={pagenum}
+                        setpagenum={setpagenum}
+                        setArticles={setArticles}
                     /> :
                     <ResturentsPreloaders />
                 }

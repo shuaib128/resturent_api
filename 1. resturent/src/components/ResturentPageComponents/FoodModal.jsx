@@ -2,7 +2,6 @@ import React from 'react'
 
 const FoodModal = (props) => {
     const input_structre = JSON.parse(props.item.item_structor)
-    console.log(input_structre);
 
     return (
         <div className={"food_modal food_modal_" + props.item.id}>

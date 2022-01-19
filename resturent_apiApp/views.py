@@ -25,7 +25,6 @@ class PostUserWritePermission(BasePermission):
         return obj.auhtor == request.user
 
 
-
 # Create your views here.
 class ResturentsViewSet(APIView):
     parser_classes = [MultiPartParser, FormParser, JSONParser]
@@ -34,15 +33,12 @@ class ResturentsViewSet(APIView):
 
         paginator = Paginator(restorents, 12)
         page_number = request.data["pagenum"]
-        print(page_number)
 
         if page_number:
             if int(page_number) <= paginator.num_pages:
                 obj_list = paginator.get_page(page_number)
-                obj_list = obj_list.object_list.values()
-
-                return JsonResponse(list(obj_list), status=200, safe=False)
-
+                serilizer = ResturentSerializer(obj_list, many=True)
+                return Response(serilizer.data)
 
 
 #############Single resturent############
@@ -64,7 +60,6 @@ class ResturentsSearchViewSet(APIView):
             return Response(serilizer.data)
         else:
             return Response("No Resturent")
-
 
 
 ###################Create New Resturent#################
@@ -97,14 +92,24 @@ class ResturentCreateView(APIView):
         return Response(serilizer.data)
 
 
-
 ###########Create New Food Item and add them##############
 class ItemCreateView(APIView):
     parser_classes = [MultiPartParser, FormParser, JSONParser]
     def post(self, request, format=None):
+        #Helper function (detirmind if to return true or false)
+        def true_or_false(data):
+            if data == "false":
+                return False
+            else:
+                return True
+
         #make category instance
         category = Catrgory()
-        category.title = request.data["Catogory"]
+        if Catrgory.objects.filter(title = request.data["Catogory"]).exists():
+            print("duplicate")
+            pass
+        else:
+            category.title = request.data["Catogory"]
         category.save()
 
         #Make item instance
@@ -113,6 +118,9 @@ class ItemCreateView(APIView):
         item.body = request.data["Description"]
         item.category = get_object_or_404(Catrgory, title=request.data["Catogory"])
         item.price = request.data["Distance"]
+        item.devivery = true_or_false(request.data["isDelivery"])
+        item.pickup = true_or_false(request.data["isPickUp"])
+        item.dine_in = true_or_false(request.data["isDinein"])
         try:
             item.image = request.data["coverimage"]
         except:

@@ -81,8 +81,8 @@ const AddItemModal = (props) => {
                         {input_structre.map((item, index) => (
                             <>
                                 <form id="type_div" key={index}>
-                                    <input 
-                                        class="main_type" 
+                                    <input
+                                        class="main_type"
                                         placeholder={item[0]}
                                         onChange={() => setIsSubmit(true)}
                                     />

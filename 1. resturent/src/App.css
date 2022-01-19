@@ -461,7 +461,7 @@ body img {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     margin-bottom: 9%;
-    row-gap: 9%;
+    row-gap: 3%;
     column-gap: 1.5%;
 }
 
@@ -1082,4 +1082,31 @@ body img {
 .extras{
     display: grid;
     grid-template-columns: 1fr 1fr;
+}
+
+.Check_div{
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.res_add_form .checkpickup{
+    width: 15px;
+    height: 15px;
+    margin: 0;
+    margin-left: 11px;
+}
+
+.res_add_form .checkdelivery{
+    width: 15px;
+    height: 15px;
+    margin: 0;
+    margin-left: 11px;
+}
+
+.res_add_form .checkdinein{
+    width: 15px;
+    height: 15px;
+    margin: 0;
+    margin-left: 11px;
 }

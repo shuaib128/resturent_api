@@ -10,6 +10,10 @@ const AddFoodForm = (props) => {
     const [Distance, setDistance] = useState("")
     const [Catogory, setCatogory] = useState("")
     const [coverimage, setCoverimage] = useState();
+    const [isDelivery, setisDelivery] = useState(false)
+    const [isPickUp, setisPickUp] = useState(false)
+    const [isDinein, setisDinein] = useState(false)
+
     const { id } = useParams()
 
     //Handle image upload
@@ -44,6 +48,9 @@ const AddFoodForm = (props) => {
         formData.append('Catogory', Catogory)
         formData.append('userID', props.ProfileItem.user)
         formData.append('resturent_id', id)
+        formData.append('isDelivery', isDelivery)
+        formData.append('isPickUp', isPickUp)
+        formData.append('isDinein', isDinein)
         try {
             formData.append('coverimage', coverimage.image)
         } catch (error) {
@@ -83,10 +90,28 @@ const AddFoodForm = (props) => {
                 <input type="file" accept="image/*"
                     onChange={uploadCover}
                 />
+                <div className='Check_div'>
+                    <label>Delivery</label>
+                    <input type="checkbox" className='checkpickup'
+                        onChange={e => setisPickUp(e.target.checked)}
+                    />
+                </div>
+                <div className='Check_div'>
+                    <label>Pickup</label>
+                    <input type="checkbox" className='checkdelivery'
+                        onChange={e => setisDelivery(e.target.checked)}
+                    />
+                </div>
+                <div className='Check_div'>
+                    <label>Dine-in</label>
+                    <input type="checkbox" className='checkdinein'
+                        onChange={e => setisDinein(e.target.checked)}
+                    />
+                </div>
 
                 <div className="res_prevImage"></div>
 
-                {Name && Description && Distance &&  Location && coverimage ?
+                {Name && Description && Distance && Location && coverimage ?
                     <button type='submit' className="res_add_button">Add</button>
                     :
                     <button className="res_add_button" disabled>Add</button>

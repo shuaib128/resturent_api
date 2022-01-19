@@ -14,10 +14,13 @@ class Catrgory(models.Model):
 class Item(models.Model):
     title = models.CharField(max_length=200)
     body = models.TextField(default="Body")
-    image = models.ImageField(null=True, blank=True, upload_to='media/dineinImages',)
+    image = models.ImageField(null=True, blank=True, upload_to='media/dineinImages', default='media/dineinImages/pexels-adonyi-gábor-1414651_1cjSUoF.jpg')
     category = models.ForeignKey(Catrgory, on_delete=models.CASCADE)
     price = MoneyField( decimal_places=2, default=0, default_currency='USD', max_digits=11)
     item_structor = models.TextField(default='[["ssss","sss","23"]]', null=True, blank=True,)
+    devivery = models.BooleanField(default=False)
+    pickup = models.BooleanField(default=False)
+    dine_in = models.BooleanField(default=False)
 
     def __str__(self):
         return f"{self.title}-{self.id}"
