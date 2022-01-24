@@ -11,7 +11,7 @@ import ResturentsPreloaders from '../PreLoadersComponnets/ResturentsPreloaders';
 const AddResturentPage = (props) => {
     document.body.style.cssText = "height: unset; overflow: unset"
     
-    const [searchData, setSearchData] = useState("");
+    const [searchData, setSearchData] = useState("")
     const [HaveAccount, setHaveAccount] = useState(false)
 
     if (!props.ProfileItem) return(

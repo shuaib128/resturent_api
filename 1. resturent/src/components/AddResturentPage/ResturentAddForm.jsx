@@ -71,9 +71,27 @@ const ResturentAddForm = (props) => {
         document.querySelector(".res_add_form").reset()
     }
 
+    const AddLocation = () => {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition((position) => {
+                //Get information about lon and lat
+                console.log(position);
+
+                axios.get("http://maps.google.com/maps/api/geocode/json?latlng=" + position.coords.latitude + "," + position.coords.longitude + "&sensor=false")
+                    .then(res => {
+                        console.log(res.data);
+                    })
+            })
+        }
+    }
+
     return (
         <div>
             <form className="res_add_form" onSubmit={NewRestorant}>
+                <input type="file" accept="image/*"
+                    onChange={uploadCover}
+                />
+                <div className="res_prevImage"></div>
                 <input type="text" placeholder="Name"
                     onChange={e => setName(e.target.value)}
                 />
@@ -89,19 +107,11 @@ const ResturentAddForm = (props) => {
                 <input type="text" placeholder="Location"
                     onChange={e => setLocation(e.target.value)}
                 />
-                <input type="number" placeholder="langatude"
-                    onChange={e => setLangitude(e.target.value)}
-                />
-                <input type="number" placeholder="longatude"
-                    onChange={e => setLongitude(e.target.value)}
-                />
-                <input type="file" accept="image/*"
-                    onChange={uploadCover}
-                />
+                <button className='location_button' onClick={AddLocation}>Add Location</button>
 
-                <div className="res_prevImage"></div>
+                
 
-                {Name && Description && Distance && DelevaryFee && Location && Longitude && Langitude && coverimage ?
+                {Name && Description && Distance && DelevaryFee && Location && coverimage ?
                     <button className="res_add_button">Add</button>
                     :
                     <button className="res_add_button" disabled>Add</button>

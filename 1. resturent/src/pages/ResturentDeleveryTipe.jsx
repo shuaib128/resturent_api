@@ -10,7 +10,7 @@ import ResturentsPreloaders from '../PreLoadersComponnets/ResturentsPreloaders';
 import { BackendLink } from '../Api/BackendLink';
 import axios from 'axios';
 
-const SearchPage = (props) => {
+const ResturentDeleveryTipe = (props) => {
     const [articles, setArticles] = useState([])
     const [result_status, setresult_status] = useState([])
 
@@ -19,7 +19,7 @@ const SearchPage = (props) => {
     const params = Object.fromEntries(urlSearchParams.entries());
 
     useEffect(() => {
-        axios.post(`${BackendLink}/api/restaurants/resturent/search/`, {
+        axios.post(`${BackendLink}/api/restaurants/resturent/search/delivery/`, {
             search_query: params
         })
             .then((res) => {
@@ -30,13 +30,14 @@ const SearchPage = (props) => {
                     setresult_status(res.data);
                 }
             })
-    })
+    }, [])
 
 
     return (
         <>
             <Header
                 id="show"
+                param={params.q}
             />
 
             <HeaderResponsive />
@@ -62,4 +63,4 @@ const SearchPage = (props) => {
     )
 }
 
-export default SearchPage
+export default ResturentDeleveryTipe

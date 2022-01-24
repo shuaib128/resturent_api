@@ -9,8 +9,10 @@ class Command(BaseCommand):
         with open(title_path) as title:
             lines = title.readlines()
 
-            for line in lines:
+            for index, line in enumerate(lines):
                 resturent = Returent()
                 resturent.title = line
+                resturent.image = f"media/dineinImages/{index}.jpg"
                 resturent.body = "One of the most popular items on the menu among Uber Eats users is the Donuts and the Assorted 6 Donuts and the Maple Sugar Bacon Breakfast Sandwich are two of the items most commonly ordered together at this early morning go-to. • $ • Breakfast and Brunch • Donuts"
                 resturent.save()
+                print(index)

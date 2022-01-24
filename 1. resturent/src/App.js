@@ -15,6 +15,7 @@ import AddResturentPage from './pages/AddResturentPage';
 import AddRiderPage from './pages/AddRiderPage';
 import AddResturentItems from './pages/AddResturentItems';
 import SearchPage from './pages/SearchPage';
+import ResturentDeleveryTipe from './pages/ResturentDeleveryTipe';
 
 function App() {
   const [ProfileID, setProfileID] = useState()
@@ -68,27 +69,43 @@ function App() {
               setProfileItem={setProfileItem} setUserItem={setUserItem}
               ProfileID={ProfileID}
             />} />
+
             <Route exact path='/returent/:id' render={() => <ResturentPage
               ProfileItem={ProfileItem} UserItem={UserItem}
               setProfileItem={setProfileItem} setUserItem={setUserItem}
             />} />
+
             <Route exact path='/signup' render={() => <SignUpPage />} />
             <Route exact path='/login' render={() => <LogInPage
               setProfileID={setProfileID}
             />} />
+
             <Route exact path='/create/business' render={() => <CreateBusinessAccount />} />
             <Route exact path='/create/ride' render={() => <CreateDeliverAccount />} />
             <Route exact path='/add/resturent' render={() => <AddResturentPage
               ProfileItem={ProfileItem} UserItem={UserItem}
               UserResturents={UserResturents} setUserResturents={setUserResturents}
             />} />
+
             <Route exact path='/add/rider' render={() => <AddRiderPage
               ProfileItem={ProfileItem} UserItem={UserItem}
             />} />
+
             <Route exact path='/add/item/:id' render={() => <AddResturentItems
               ProfileItem={ProfileItem} UserItem={UserItem}
             />} />
+
             <Route exact path='/search/:str' render={() => <SearchPage
+              ProfileItem={ProfileItem} UserItem={UserItem}
+              ProfileID={ProfileID}
+            />} />
+
+            <Route exact path='/search/:str' render={() => <SearchPage
+              ProfileItem={ProfileItem} UserItem={UserItem}
+              ProfileID={ProfileID}
+            />} />
+
+            <Route exact path='/search/delivary/:str' render={() => <ResturentDeleveryTipe
               ProfileItem={ProfileItem} UserItem={UserItem}
               ProfileID={ProfileID}
             />} />

@@ -29,7 +29,7 @@ class PostUserWritePermission(BasePermission):
 class ResturentsViewSet(APIView):
     parser_classes = [MultiPartParser, FormParser, JSONParser]
     def post(self, request, format=None):
-        restorents = Returent.objects.all()
+        restorents = Returent.objects.filter(foodItems__devivery=True).distinct()
 
         paginator = Paginator(restorents, 12)
         page_number = request.data["pagenum"]
@@ -53,7 +53,7 @@ class ResturentsSearchViewSet(APIView):
     parser_classes = [MultiPartParser, FormParser, JSONParser]
     def post(self, request, format=None):
         search_query = request.data["search_query"]["q"]
-        restorent = Returent.objects.filter(foodItems__category__title=search_query)
+        restorent = Returent.objects.filter(foodItems__category__title=search_query).distinct()
 
         if len(list(restorent)) != 0:
             serilizer = ResturentSerializer(restorent, many=True)
@@ -146,3 +146,30 @@ class AddItemStructorView(APIView):
         foodItem.save()
 
         return Response("serilizer.data")
+
+
+#########Delevary type search###########
+class DelivaryTypeView(APIView):
+    parser_classes = [MultiPartParser, FormParser, JSONParser]
+    def post(self, request, format=None):
+        search_query = request.data["search_query"]["q"]
+        print(search_query)
+
+        if search_query == "pickup":
+            restorent = Returent.objects.filter(foodItems__pickup=True).distinct()
+
+            if len(list(restorent)) != 0:
+                serilizer = ResturentSerializer(restorent, many=True)
+                return Response(serilizer.data)
+            else:
+                return Response("No Resturent")
+
+        
+        if search_query == "dinein":
+            restorent = Returent.objects.filter(foodItems__dine_in=True).distinct()
+
+            if len(list(restorent)) != 0:
+                serilizer = ResturentSerializer(restorent, many=True)
+                return Response(serilizer.data)
+            else:
+                return Response("No Resturent")

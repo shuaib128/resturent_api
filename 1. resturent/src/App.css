@@ -101,7 +101,7 @@ body img {
 }
 
 .logo {
-    margin-left: 18px;
+    margin-left: 10px;
     font-size: 33px;
     margin-top: 5px;
 }
@@ -114,16 +114,16 @@ body img {
     margin-right: 23px;
 }
 
-.delevary_option p {
-    margin-right: 20px;
+.delevary_option a {
+    margin-right: 5px;
     padding-top: 12px;
     font-size: 15px;
     cursor: pointer;
+    padding: 11px 16px;
 }
 
 .active_delivary_system {
     background: white;
-    padding: 11px 18px;
     border-radius: 25px;
     margin-left: 1px !important;
 }
@@ -323,22 +323,9 @@ body img {
     margin-bottom: 17px;
 }
 
-.shorts ul li::before {
-    content: "";
-    display: flex;
-    box-sizing: border-box;
-    border-radius: 50%;
+.sortcheck{
+    margin-right: 10px;
     cursor: pointer;
-    height: 22px;
-    width: 22px;
-    vertical-align: top;
-    border: 3px solid rgb(175, 175, 175);
-    margin-right: 15px;
-}
-
-.shorts ul li.current_sort::before {
-    content: "";
-    border: 8px solid black !important;
 }
 
 .price_slide {
@@ -1109,4 +1096,28 @@ body img {
     height: 15px;
     margin: 0;
     margin-left: 11px;
+}
+
+.clear_filter_Seach{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.clear_filter_Seach_button{
+    border: none;
+    background: black;
+    color: white;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.clear_filter_clear_button{
+    margin-right: 29px;
+    font-size: 16px;
+    font-weight: 700;
+    border-bottom: 1px solid black;
+    cursor: pointer;
+    height: 21px;
+    margin-top: 5px;
 }

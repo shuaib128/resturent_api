@@ -29,6 +29,7 @@ const HomePage = (props) => {
         <>
             <Header
                 id="show"
+                param={window.location.pathname}
             />
 
             <HeaderResponsive />

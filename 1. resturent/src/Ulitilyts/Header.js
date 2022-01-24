@@ -43,9 +43,15 @@ const Header = (props) => {
 
             <div style={{ display: 'flex' }}>
                 <div className="delevary_option">
-                    <p className="active_delivary_system">Delivery</p>
-                    <p>Pickup</p>
-                    <p>Dine-in</p>
+                    <Link className={props.param === "/" ? "active_delivary_system" : ""} to={`/`}>
+                        Delivary
+                    </Link>
+                    <Link className={props.param === "pickup" ? "active_delivary_system" : ""} to={`/search/delivary/query?q=pickup`}>
+                        Pickup
+                    </Link>
+                    <Link className={props.param === "dinein" ? "active_delivary_system" : ""} to={`/search/delivary/query?q=dinein`}>
+                        Dine-in
+                    </Link>
                 </div>
 
                 <div className="place_locator">

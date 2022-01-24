@@ -15,7 +15,7 @@ class Command(BaseCommand):
         with open(title_path) as title:
             lines = title.readlines()
 
-            for line in lines:
+            for index, line in enumerate(lines):
                 #make category instance
                 category = Catrgory()
                 categoryTitle = category_list[count]
@@ -30,6 +30,7 @@ class Command(BaseCommand):
                 item.title = line
                 item.body = "One of the most popular items on the menu among Uber Eats users is the Donuts and the Assorted 6 Donuts and the Maple Sugar Bacon Breakfast Sandwich are two of the items most commonly ordered together at this early morning go-to. • $ • Breakfast and Brunch • Donuts"
                 item.category = get_object_or_404(Catrgory, title=categoryTitle)
+                item.image = f"media/dineinImages/{index}.jpg"
                 item.price = random.randint(2, 21)
                 item.devivery = True
                 item.save()

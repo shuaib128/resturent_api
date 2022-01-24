@@ -1,25 +1,59 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 const FilterShort = () => {
-    const select = (e) => {
-        if(e.target.classList.contains('current_sort')){
-            e.target.classList.toggle("current_sort")
+    const [Default, setDefault] = useState(true);
+    const [Populer, setPopuler] = useState(false);
+    const [Rating, setRating] = useState(false);
+    const [DeleveryTime, setDeleveryTime] = useState(false);
+
+    //Chek and unchek others
+    const checkUncheck = (e) => {
+        var checkboxes = document.querySelectorAll(".short")  
+        for (let index = 0; index < checkboxes.length; index++) {
+            checkboxes[index].checked = false
         }
-        else{
-            e.target.classList.toggle("current_sort")
-        }
+        e.target.checked = true
+        console.log(e.target.checked);
     }
 
     return (
         <div className="shorts">
-            <h1 style={{fontSize: "19px", fontWeight: 700, marginBottom: "12px"}}>
+            <h1 style={{ fontSize: "19px", fontWeight: 700, marginBottom: "12px" }}>
                 Sort
             </h1>
             <ul>
-                <li className="current_sort" onClick={select}>Picked for you (default)</li>
-                <li onClick={select}>Most popular</li>
-                <li onClick={select}>Rating</li>
-                <li onClick={select}>Delivery time</li>
+                <li className="current_sort">
+                    <input type="checkbox" className='sortcheck short' defaultChecked
+                        onChange={e => setDefault(e.target.checked)}
+                        on
+                        onClick={checkUncheck}
+                    />
+                    Picked for you (default)
+                </li>
+
+                <li>
+                    <input type="checkbox" className='sortcheck short'
+                        onChange={e => setPopuler(e.target.checked)}
+                        onClick={checkUncheck}
+                    />
+                    Most popular
+                </li>
+
+                <li>
+                    <input type="checkbox" className='sortcheck short'
+                        onChange={e => setRating(e.target.checked)}
+                        onClick={checkUncheck}
+                    />
+                    Rating
+                </li>
+
+                <li>
+                    <input type="checkbox" className='sortcheck short'
+                        onChange={e => setDeleveryTime(e.target.checked)}
+                        onClick={checkUncheck}
+                    />
+                    Delivery time
+                </li>
             </ul>
         </div>
     )
