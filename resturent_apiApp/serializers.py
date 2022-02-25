@@ -1,11 +1,20 @@
-from django.db import models
-from django.db.models import fields
 from rest_framework import serializers
-from .models import Returent, Item
+from .models import Returent, Item, Reviews
 
 
+class ReviewSerilizer(serializers.ModelSerializer):
+    class Meta:
+        model = Reviews
+        fields = (
+            'id',
+            "ratting",
+            "body"
+        )
+
+# Food Item serilizer
 class ItemSerializer(serializers.ModelSerializer):
     categoryName = serializers.CharField(source='category', read_only=True)
+    reviews = ReviewSerilizer(many=True)
 
     class Meta:
         model = Item
@@ -20,10 +29,14 @@ class ItemSerializer(serializers.ModelSerializer):
             "devivery",
             "pickup",
             "dine_in",
+            "get_avg_rating",
+            "reviews"
         )
 
 
+# Resturent serilizer
 class ResturentSerializer(serializers.ModelSerializer):
+    # Food Section
     foodItems = ItemSerializer(many=True)
 
     class Meta:
@@ -38,5 +51,6 @@ class ResturentSerializer(serializers.ModelSerializer):
             'store_location',
             'store_longitude',
             'store_latitude',
+            "get_avg_ratings"
         )
         model = Returent

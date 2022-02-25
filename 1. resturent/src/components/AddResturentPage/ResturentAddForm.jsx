@@ -75,7 +75,6 @@ const ResturentAddForm = (props) => {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition((position) => {
                 //Get information about lon and lat
-                console.log(position);
 
                 axios.get("http://maps.google.com/maps/api/geocode/json?latlng=" + position.coords.latitude + "," + position.coords.longitude + "&sensor=false")
                     .then(res => {

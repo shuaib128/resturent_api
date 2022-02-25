@@ -1,4 +1,6 @@
 import React from 'react'
+import ItemReview from './ItemReview'
+import ItemReviews from './ItemReviews'
 
 const FoodModal = (props) => {
     const input_structre = JSON.parse(props.item.item_structor)
@@ -32,6 +34,9 @@ const FoodModal = (props) => {
                         </div>
                     ))}
                 </div>
+
+                <ItemReview id={props.item.id} />
+                <ItemReviews Reviews={props.item.reviews} />
             </div>
         </div>
     )

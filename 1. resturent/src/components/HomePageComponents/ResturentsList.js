@@ -46,9 +46,14 @@ const ResturentsList = (props) => {
         if (node) observer.current.observe(node)
     }, [props.pagenum, props.LoaingPost])
 
-    if (!props.articles) return "Loading...";
-    if (!props.articles) return "Error!";
-    if (!props.articles) return "Error!";
+    if (!props.articles) return "Loading..."
+    if (!props.articles) return "Error!"
+    if (!props.articles) return "Error!"
+
+    //Calculate avarage
+    const calAvgRating = () => {
+
+    }
 
     //Initial Rendearing
     return (
@@ -99,7 +104,11 @@ const ResturentsList = (props) => {
                                         {article.title}
                                     </Link>
                                 </h2>
-                                <p className="revew">4.7</p>
+                                <p className="revew">
+                                    {article.get_avg_ratings !== null ? article.get_avg_ratings:
+                                        0
+                                    }
+                                </p>
                             </div>
 
                             <div className="distance">

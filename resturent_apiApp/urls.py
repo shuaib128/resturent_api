@@ -1,9 +1,8 @@
 from django.urls import path
-from django.urls.conf import include, include
 from .views import (
     ResturentsViewSet, ResturentCreateView, ItemCreateView,
     ResturentViewSet, ResturentsSearchViewSet, AddItemStructorView,
-    DelivaryTypeView
+    DelivaryTypeView, MakeReviewView
 )
 
 
@@ -15,4 +14,5 @@ urlpatterns = [
     path('add/itemstr/', AddItemStructorView.as_view()),
     path('add/resturent/', ResturentCreateView.as_view()),
     path('add/item/', ItemCreateView.as_view()),
+    path('add/review/', MakeReviewView.as_view()),
 ]

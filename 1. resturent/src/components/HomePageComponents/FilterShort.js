@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import axios from 'axios';
 
 const FilterShort = () => {
     const [Default, setDefault] = useState(true);
@@ -8,12 +9,17 @@ const FilterShort = () => {
 
     //Chek and unchek others
     const checkUncheck = (e) => {
-        var checkboxes = document.querySelectorAll(".short")  
+        var checkboxes = document.querySelectorAll(".short")
         for (let index = 0; index < checkboxes.length; index++) {
             checkboxes[index].checked = false
         }
+
+        setDefault(false)
+        setPopuler(false)
+        setRating(false)
+        setDeleveryTime(false)
+        
         e.target.checked = true
-        console.log(e.target.checked);
     }
 
     return (
@@ -25,7 +31,6 @@ const FilterShort = () => {
                 <li className="current_sort">
                     <input type="checkbox" className='sortcheck short' defaultChecked
                         onChange={e => setDefault(e.target.checked)}
-                        on
                         onClick={checkUncheck}
                     />
                     Picked for you (default)

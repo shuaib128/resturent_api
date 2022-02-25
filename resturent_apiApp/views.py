@@ -1,20 +1,22 @@
+from unicodedata import name
 from users.models import Profile
-from .models import Returent, Item, Catrgory
+from .models import Returent, Item, Catrgory, Reviews
 from .serializers import ResturentSerializer, ItemSerializer
 from rest_framework.views import APIView
 from rest_framework.parsers import JSONParser, MultiPartParser, FormParser
 from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
 from rest_framework.permissions import (
-    SAFE_METHODS, 
+    SAFE_METHODS,
     BasePermission,
 )
 from rest_framework import generics
 from django.core.paginator import Paginator
-from django.http import JsonResponse
+from uuid import uuid4
+import datetime
 
 
-#Custom permissions
+# Custom permissions
 class PostUserWritePermission(BasePermission):
     message = 'Editing posts is restricted to the author only.'
 
@@ -28,8 +30,10 @@ class PostUserWritePermission(BasePermission):
 # Create your views here.
 class ResturentsViewSet(APIView):
     parser_classes = [MultiPartParser, FormParser, JSONParser]
+
     def post(self, request, format=None):
-        restorents = Returent.objects.filter(foodItems__devivery=True).distinct()
+        restorents = Returent.objects.filter(
+            foodItems__devivery=True).distinct()
 
         paginator = Paginator(restorents, 12)
         page_number = request.data["pagenum"]
@@ -51,9 +55,11 @@ class ResturentViewSet(generics.RetrieveUpdateDestroyAPIView):
 #############Search View################
 class ResturentsSearchViewSet(APIView):
     parser_classes = [MultiPartParser, FormParser, JSONParser]
+
     def post(self, request, format=None):
         search_query = request.data["search_query"]["q"]
-        restorent = Returent.objects.filter(foodItems__category__title=search_query).distinct()
+        restorent = Returent.objects.filter(
+            foodItems__category__title=search_query).distinct()
 
         if len(list(restorent)) != 0:
             serilizer = ResturentSerializer(restorent, many=True)
@@ -65,10 +71,11 @@ class ResturentsSearchViewSet(APIView):
 ###################Create New Resturent#################
 class ResturentCreateView(APIView):
     parser_classes = [MultiPartParser, FormParser, JSONParser]
+
     def post(self, request, format=None):
         profile = get_object_or_404(Profile, user=request.data["userID"])
-        
-        #Create new restorunt
+
+        # Create new restorunt
         resturent = Returent()
         resturent.title = request.data["Name"]
         resturent.body = request.data["Description"]
@@ -84,7 +91,8 @@ class ResturentCreateView(APIView):
             pass
         resturent.save()
 
-        created_restorent = get_object_or_404(Returent, title=request.data["Name"])
+        created_restorent = get_object_or_404(
+            Returent, title=request.data["Name"])
         profile.returent.add(created_restorent)
 
         serilizer = ResturentSerializer(created_restorent)
@@ -95,28 +103,29 @@ class ResturentCreateView(APIView):
 ###########Create New Food Item and add them##############
 class ItemCreateView(APIView):
     parser_classes = [MultiPartParser, FormParser, JSONParser]
+
     def post(self, request, format=None):
-        #Helper function (detirmind if to return true or false)
+        # Helper function (detirmind if to return true or false)
         def true_or_false(data):
             if data == "false":
                 return False
             else:
                 return True
 
-        #make category instance
+        # make category instance
         category = Catrgory()
-        if Catrgory.objects.filter(title = request.data["Catogory"]).exists():
-            print("duplicate")
+        if Catrgory.objects.filter(title=request.data["Catogory"]).exists():
             pass
         else:
             category.title = request.data["Catogory"]
         category.save()
 
-        #Make item instance
+        # Make item instance
         item = Item()
         item.title = request.data["Name"]
         item.body = request.data["Description"]
-        item.category = get_object_or_404(Catrgory, title=request.data["Catogory"])
+        item.category = get_object_or_404(
+            Catrgory, title=request.data["Catogory"])
         item.price = request.data["Distance"]
         item.devivery = true_or_false(request.data["isDelivery"])
         item.pickup = true_or_false(request.data["isPickUp"])
@@ -127,8 +136,9 @@ class ItemCreateView(APIView):
             pass
         item.save()
 
-        #Add item to resturent
-        resturent = get_object_or_404(Returent, id=request.data["resturent_id"])
+        # Add item to resturent
+        resturent = get_object_or_404(
+            Returent, id=request.data["resturent_id"])
         created_item = get_object_or_404(Item, title=request.data["Name"])
         resturent.foodItems.add(
             created_item
@@ -140,6 +150,7 @@ class ItemCreateView(APIView):
 
 class AddItemStructorView(APIView):
     parser_classes = [MultiPartParser, FormParser, JSONParser]
+
     def post(self, request, format=None):
         foodItem = get_object_or_404(Item, id=request.data["item_id"])
         foodItem.item_structor = request.data["structor"]
@@ -151,12 +162,13 @@ class AddItemStructorView(APIView):
 #########Delevary type search###########
 class DelivaryTypeView(APIView):
     parser_classes = [MultiPartParser, FormParser, JSONParser]
+
     def post(self, request, format=None):
         search_query = request.data["search_query"]["q"]
-        print(search_query)
 
         if search_query == "pickup":
-            restorent = Returent.objects.filter(foodItems__pickup=True).distinct()
+            restorent = Returent.objects.filter(
+                foodItems__pickup=True).distinct()
 
             if len(list(restorent)) != 0:
                 serilizer = ResturentSerializer(restorent, many=True)
@@ -164,12 +176,42 @@ class DelivaryTypeView(APIView):
             else:
                 return Response("No Resturent")
 
-        
         if search_query == "dinein":
-            restorent = Returent.objects.filter(foodItems__dine_in=True).distinct()
+            restorent = Returent.objects.filter(
+                foodItems__dine_in=True).distinct()
 
             if len(list(restorent)) != 0:
                 serilizer = ResturentSerializer(restorent, many=True)
                 return Response(serilizer.data)
             else:
                 return Response("No Resturent")
+
+
+# Make review
+class MakeReviewView(APIView):
+    parser_classes = [MultiPartParser, FormParser, JSONParser]
+
+    def post(self, request, format=None):
+        random_title = str(uuid4())
+        foodID = request.data["foodID"]
+        date_time_key = str(datetime.datetime.now().strftime("%Y-%m-%d %H:%M"))
+        ratting = request.data["rating"]
+        review = request.data["review"]
+        print(review)
+
+        Reviews.objects.create(
+            name=f"{review} {foodID} {date_time_key} {random_title}",
+            ratting=ratting,
+            body=request.data["review"]
+        )
+
+        item = get_object_or_404(Item, id=foodID)
+        review_id = Reviews.objects.filter(
+            name=f"{review} {foodID} {date_time_key} {random_title}")
+        print(review_id)
+        review_id = tuple(review_id.values_list('id', flat=True))[0]
+
+        item.save()
+        item.reviews.add(review_id)
+
+        return Response("done")

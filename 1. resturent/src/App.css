@@ -290,7 +290,9 @@ body img {
     border-radius: 100px;
     color: rgb(6, 193, 103);
     font-weight: 700;
-    height: 19px;
+    height: 20px;
+    width: 20px;
+    text-align: center;
 }
 
 .dis {
@@ -1120,4 +1122,36 @@ body img {
     cursor: pointer;
     height: 21px;
     margin-top: 5px;
+}
+
+.review_section{
+    margin-top: 45px;
+}
+
+.review_section textarea{
+    width: 77%;
+    height: 134px;
+    padding: 11px 10px;
+    margin-top: 10px;
+    border-radius: 5px;
+}
+
+.review_add_btn{
+    display: block;
+    margin-top: 5px;
+    background: black;
+    color: white;
+    border: 0;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.ratingRadio{
+    display: none;
+}
+
+.star{
+    margin-right: 5px;
+    cursor: pointer;
+    transition: color 200ms;
 }
